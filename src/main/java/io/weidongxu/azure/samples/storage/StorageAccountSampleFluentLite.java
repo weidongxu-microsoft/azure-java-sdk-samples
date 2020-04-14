@@ -6,7 +6,7 @@ import com.microsoft.azure.management.storage.v2019_06_01.implementation.SkuInne
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.StorageManager;
 import io.weidongxu.azure.samples.ResourceContext;
 
-class StorageAccountSampleFluentLite {
+public class StorageAccountSampleFluentLite {
 
     public static void run(StorageManager client, ResourceContext context) {
         client.storageAccounts().define("sasamplefluentlite")
