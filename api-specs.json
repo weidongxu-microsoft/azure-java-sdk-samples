@@ -1,4 +1,10 @@
 {
+  "resources": {
+    "dir": ".",
+    "source": "specification/resources/resource-manager/readme.md",
+    "package": "com.azure.management.vanilla.resources",
+    "args": "--payload-flattening-threshold=1  --tag=package-resources-2019-08 --add-inner=Deployment"
+  },
   "storage": {
     "dir": ".",
     "source": "specification/storage/resource-manager/readme.md",
