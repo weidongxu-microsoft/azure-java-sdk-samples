@@ -1,5 +1,6 @@
 package io.weidongxu.azure.samples.storage;
 
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.models.StorageManagementClientBuilder;
 import com.azure.management.vanilla.storage.models.StorageManagementClientImpl;
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.StorageManager;
@@ -13,15 +14,11 @@ public class StorageAccountSample extends SampleBase {
     }
 
     public void runFluentLite() {
-        try {
-            StorageManager client = StorageManager
-                    .configure().withLogLevel(LogLevel.BASIC)
-                    .authenticate(azureTokenCredentials(), subscriptionId);
+        StorageManager client = StorageManager
+                .configure().withLogLevel(LogLevel.BASIC)
+                .authenticate(azureTokenCredentials(), subscriptionId);
 
-            StorageAccountSampleFluentLite.run(client, this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        StorageAccountSampleFluentLite.run(client, this);
     }
 
     public void runVanilla() {
@@ -39,8 +36,8 @@ public class StorageAccountSample extends SampleBase {
             sample.createResourceGroup();
 
             sample.runFluentLite();
-            //sample.runVanilla();
-        } catch (Exception e) {
+            sample.runVanilla();
+        } catch (Throwable e) {
             e.printStackTrace();
         } finally {
             sample.deleteResourceGroup();

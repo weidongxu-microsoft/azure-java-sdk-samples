@@ -62,7 +62,7 @@ public class SampleBase implements ResourceContext {
             azureTokenCredentials = new ApplicationTokenCredentials(clientId, tenantId, clientSecret,
                     com.microsoft.azure.AzureEnvironment.AZURE);
         }
-        return azureTokenCredentials();
+        return azureTokenCredentials;
     }
 
     protected void createResourceGroup() {

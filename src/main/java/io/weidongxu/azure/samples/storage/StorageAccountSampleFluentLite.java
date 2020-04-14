@@ -9,7 +9,7 @@ import io.weidongxu.azure.samples.ResourceContext;
 class StorageAccountSampleFluentLite {
 
     public static void run(StorageManager client, ResourceContext context) {
-        client.storageAccounts().define("saSampleFluentLite")
+        client.storageAccounts().define("sasamplefluentlite")
                 .withRegion(context.location())
                 .withExistingResourceGroup(context.resourceGroup())
                 .withKind(Kind.STORAGE_V2)

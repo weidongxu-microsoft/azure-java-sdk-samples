@@ -10,7 +10,7 @@ import io.weidongxu.azure.samples.ResourceContext;
 public class StorageAccountSampleVanilla {
 
     public static void run(StorageManagementClientImpl client, ResourceContext context) {
-        client.storageAccounts().create(context.resourceGroup(), "saSampleVanilla",
+        client.storageAccounts().create(context.resourceGroup(), "sasamplevanilla",
                 new StorageAccountCreateParameters()
                         .setLocation(context.location())
                         .setKind(Kind.STORAGE_V2)
