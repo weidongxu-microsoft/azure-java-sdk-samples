@@ -948,12 +948,8 @@ public final class BlobContainersInner {
      * @param ifMatch The entity state (ETag) version of the immutability policy to update. A value of "*" can be used
      *     to apply the operation only if the immutability policy already exists. If omitted, this operation will always
      *     be applied.
-     * @param immutabilityPeriodSinceCreationInDays The immutability period for the blobs in the container since the
-     *     policy creation, in days.
-     * @param allowProtectedAppendWrites This property can only be changed for unlocked time-based retention policies.
-     *     When enabled, new blocks can be written to an append blob while maintaining immutability protection and
-     *     compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property
-     *     cannot be changed with ExtendImmutabilityPolicy API.
+     * @param parameters The ImmutabilityPolicy property of a blob container, including Id, resource name, resource
+     *     type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -966,16 +962,8 @@ public final class BlobContainersInner {
             String accountName,
             String containerName,
             String ifMatch,
-            Integer immutabilityPeriodSinceCreationInDays,
-            Boolean allowProtectedAppendWrites) {
+            ImmutabilityPolicyInner parameters) {
         final String immutabilityPolicyName = "default";
-        ImmutabilityPolicyInner parametersInternal = null;
-        if (immutabilityPeriodSinceCreationInDays != null || allowProtectedAppendWrites != null) {
-            parametersInternal = new ImmutabilityPolicyInner();
-            parametersInternal.setImmutabilityPeriodSinceCreationInDays(immutabilityPeriodSinceCreationInDays);
-            parametersInternal.setAllowProtectedAppendWrites(allowProtectedAppendWrites);
-        }
-        ImmutabilityPolicyInner parameters = parametersInternal;
         return FluxUtil
             .withContext(
                 context ->
@@ -1008,12 +996,8 @@ public final class BlobContainersInner {
      * @param ifMatch The entity state (ETag) version of the immutability policy to update. A value of "*" can be used
      *     to apply the operation only if the immutability policy already exists. If omitted, this operation will always
      *     be applied.
-     * @param immutabilityPeriodSinceCreationInDays The immutability period for the blobs in the container since the
-     *     policy creation, in days.
-     * @param allowProtectedAppendWrites This property can only be changed for unlocked time-based retention policies.
-     *     When enabled, new blocks can be written to an append blob while maintaining immutability protection and
-     *     compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property
-     *     cannot be changed with ExtendImmutabilityPolicy API.
+     * @param parameters The ImmutabilityPolicy property of a blob container, including Id, resource name, resource
+     *     type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1025,15 +1009,43 @@ public final class BlobContainersInner {
         String accountName,
         String containerName,
         String ifMatch,
-        Integer immutabilityPeriodSinceCreationInDays,
-        Boolean allowProtectedAppendWrites) {
+        ImmutabilityPolicyInner parameters) {
         return createOrUpdateImmutabilityPolicyWithResponseAsync(
-                resourceGroupName,
-                accountName,
-                containerName,
-                ifMatch,
-                immutabilityPeriodSinceCreationInDays,
-                allowProtectedAppendWrites)
+                resourceGroupName, accountName, containerName, ifMatch, parameters)
+            .flatMap(
+                (BlobContainersCreateOrUpdateImmutabilityPolicyResponse res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
+    }
+
+    /**
+     * Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for
+     * this operation.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case
+     *     insensitive.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names
+     *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @param containerName The name of the blob container within the specified storage account. Blob container names
+     *     must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every
+     *     dash (-) character must be immediately preceded and followed by a letter or number.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ImmutabilityPolicyInner> createOrUpdateImmutabilityPolicyAsync(
+        String resourceGroupName, String accountName, String containerName) {
+        final String ifMatch = null;
+        final ImmutabilityPolicyInner parameters = null;
+        final Context context = null;
+        return createOrUpdateImmutabilityPolicyWithResponseAsync(
+                resourceGroupName, accountName, containerName, ifMatch, parameters)
             .flatMap(
                 (BlobContainersCreateOrUpdateImmutabilityPolicyResponse res) -> {
                     if (res.getValue() != null) {
@@ -1058,12 +1070,8 @@ public final class BlobContainersInner {
      * @param ifMatch The entity state (ETag) version of the immutability policy to update. A value of "*" can be used
      *     to apply the operation only if the immutability policy already exists. If omitted, this operation will always
      *     be applied.
-     * @param immutabilityPeriodSinceCreationInDays The immutability period for the blobs in the container since the
-     *     policy creation, in days.
-     * @param allowProtectedAppendWrites This property can only be changed for unlocked time-based retention policies.
-     *     When enabled, new blocks can be written to an append blob while maintaining immutability protection and
-     *     compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property
-     *     cannot be changed with ExtendImmutabilityPolicy API.
+     * @param parameters The ImmutabilityPolicy property of a blob container, including Id, resource name, resource
+     *     type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1075,15 +1083,34 @@ public final class BlobContainersInner {
         String accountName,
         String containerName,
         String ifMatch,
-        Integer immutabilityPeriodSinceCreationInDays,
-        Boolean allowProtectedAppendWrites) {
-        return createOrUpdateImmutabilityPolicyAsync(
-                resourceGroupName,
-                accountName,
-                containerName,
-                ifMatch,
-                immutabilityPeriodSinceCreationInDays,
-                allowProtectedAppendWrites)
+        ImmutabilityPolicyInner parameters) {
+        return createOrUpdateImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, parameters)
+            .block();
+    }
+
+    /**
+     * Creates or updates an unlocked immutability policy. ETag in If-Match is honored if given but not required for
+     * this operation.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case
+     *     insensitive.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names
+     *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @param containerName The name of the blob container within the specified storage account. Blob container names
+     *     must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every
+     *     dash (-) character must be immediately preceded and followed by a letter or number.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ImmutabilityPolicyInner createOrUpdateImmutabilityPolicy(
+        String resourceGroupName, String accountName, String containerName) {
+        final String ifMatch = null;
+        final ImmutabilityPolicyInner parameters = null;
+        final Context context = null;
+        return createOrUpdateImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, parameters)
             .block();
     }
 
@@ -1447,12 +1474,8 @@ public final class BlobContainersInner {
      * @param ifMatch The entity state (ETag) version of the immutability policy to update. A value of "*" can be used
      *     to apply the operation only if the immutability policy already exists. If omitted, this operation will always
      *     be applied.
-     * @param immutabilityPeriodSinceCreationInDays The immutability period for the blobs in the container since the
-     *     policy creation, in days.
-     * @param allowProtectedAppendWrites This property can only be changed for unlocked time-based retention policies.
-     *     When enabled, new blocks can be written to an append blob while maintaining immutability protection and
-     *     compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property
-     *     cannot be changed with ExtendImmutabilityPolicy API.
+     * @param parameters The ImmutabilityPolicy property of a blob container, including Id, resource name, resource
+     *     type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1464,15 +1487,7 @@ public final class BlobContainersInner {
         String accountName,
         String containerName,
         String ifMatch,
-        Integer immutabilityPeriodSinceCreationInDays,
-        Boolean allowProtectedAppendWrites) {
-        ImmutabilityPolicyInner parametersInternal = null;
-        if (immutabilityPeriodSinceCreationInDays != null || allowProtectedAppendWrites != null) {
-            parametersInternal = new ImmutabilityPolicyInner();
-            parametersInternal.setImmutabilityPeriodSinceCreationInDays(immutabilityPeriodSinceCreationInDays);
-            parametersInternal.setAllowProtectedAppendWrites(allowProtectedAppendWrites);
-        }
-        ImmutabilityPolicyInner parameters = parametersInternal;
+        ImmutabilityPolicyInner parameters) {
         return FluxUtil
             .withContext(
                 context ->
@@ -1504,12 +1519,8 @@ public final class BlobContainersInner {
      * @param ifMatch The entity state (ETag) version of the immutability policy to update. A value of "*" can be used
      *     to apply the operation only if the immutability policy already exists. If omitted, this operation will always
      *     be applied.
-     * @param immutabilityPeriodSinceCreationInDays The immutability period for the blobs in the container since the
-     *     policy creation, in days.
-     * @param allowProtectedAppendWrites This property can only be changed for unlocked time-based retention policies.
-     *     When enabled, new blocks can be written to an append blob while maintaining immutability protection and
-     *     compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property
-     *     cannot be changed with ExtendImmutabilityPolicy API.
+     * @param parameters The ImmutabilityPolicy property of a blob container, including Id, resource name, resource
+     *     type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1521,15 +1532,9 @@ public final class BlobContainersInner {
         String accountName,
         String containerName,
         String ifMatch,
-        Integer immutabilityPeriodSinceCreationInDays,
-        Boolean allowProtectedAppendWrites) {
+        ImmutabilityPolicyInner parameters) {
         return extendImmutabilityPolicyWithResponseAsync(
-                resourceGroupName,
-                accountName,
-                containerName,
-                ifMatch,
-                immutabilityPeriodSinceCreationInDays,
-                allowProtectedAppendWrites)
+                resourceGroupName, accountName, containerName, ifMatch, parameters)
             .flatMap(
                 (BlobContainersExtendImmutabilityPolicyResponse res) -> {
                     if (res.getValue() != null) {
@@ -1554,12 +1559,44 @@ public final class BlobContainersInner {
      * @param ifMatch The entity state (ETag) version of the immutability policy to update. A value of "*" can be used
      *     to apply the operation only if the immutability policy already exists. If omitted, this operation will always
      *     be applied.
-     * @param immutabilityPeriodSinceCreationInDays The immutability period for the blobs in the container since the
-     *     policy creation, in days.
-     * @param allowProtectedAppendWrites This property can only be changed for unlocked time-based retention policies.
-     *     When enabled, new blocks can be written to an append blob while maintaining immutability protection and
-     *     compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property
-     *     cannot be changed with ExtendImmutabilityPolicy API.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ImmutabilityPolicyInner> extendImmutabilityPolicyAsync(
+        String resourceGroupName, String accountName, String containerName, String ifMatch) {
+        final ImmutabilityPolicyInner parameters = null;
+        final Context context = null;
+        return extendImmutabilityPolicyWithResponseAsync(
+                resourceGroupName, accountName, containerName, ifMatch, parameters)
+            .flatMap(
+                (BlobContainersExtendImmutabilityPolicyResponse res) -> {
+                    if (res.getValue() != null) {
+                        return Mono.just(res.getValue());
+                    } else {
+                        return Mono.empty();
+                    }
+                });
+    }
+
+    /**
+     * Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a
+     * Locked policy will be this action. ETag in If-Match is required for this operation.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case
+     *     insensitive.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names
+     *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @param containerName The name of the blob container within the specified storage account. Blob container names
+     *     must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every
+     *     dash (-) character must be immediately preceded and followed by a letter or number.
+     * @param ifMatch The entity state (ETag) version of the immutability policy to update. A value of "*" can be used
+     *     to apply the operation only if the immutability policy already exists. If omitted, this operation will always
+     *     be applied.
+     * @param parameters The ImmutabilityPolicy property of a blob container, including Id, resource name, resource
+     *     type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1571,15 +1608,36 @@ public final class BlobContainersInner {
         String accountName,
         String containerName,
         String ifMatch,
-        Integer immutabilityPeriodSinceCreationInDays,
-        Boolean allowProtectedAppendWrites) {
-        return extendImmutabilityPolicyAsync(
-                resourceGroupName,
-                accountName,
-                containerName,
-                ifMatch,
-                immutabilityPeriodSinceCreationInDays,
-                allowProtectedAppendWrites)
+        ImmutabilityPolicyInner parameters) {
+        return extendImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, parameters)
+            .block();
+    }
+
+    /**
+     * Extends the immutabilityPeriodSinceCreationInDays of a locked immutabilityPolicy. The only action allowed on a
+     * Locked policy will be this action. ETag in If-Match is required for this operation.
+     *
+     * @param resourceGroupName The name of the resource group within the user's subscription. The name is case
+     *     insensitive.
+     * @param accountName The name of the storage account within the specified resource group. Storage account names
+     *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
+     * @param containerName The name of the blob container within the specified storage account. Blob container names
+     *     must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every
+     *     dash (-) character must be immediately preceded and followed by a letter or number.
+     * @param ifMatch The entity state (ETag) version of the immutability policy to update. A value of "*" can be used
+     *     to apply the operation only if the immutability policy already exists. If omitted, this operation will always
+     *     be applied.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ImmutabilityPolicyInner extendImmutabilityPolicy(
+        String resourceGroupName, String accountName, String containerName, String ifMatch) {
+        final ImmutabilityPolicyInner parameters = null;
+        final Context context = null;
+        return extendImmutabilityPolicyAsync(resourceGroupName, accountName, containerName, ifMatch, parameters)
             .block();
     }
 

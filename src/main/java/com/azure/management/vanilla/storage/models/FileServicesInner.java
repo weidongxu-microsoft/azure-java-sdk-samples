@@ -22,8 +22,6 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.management.CloudException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.management.vanilla.storage.CorsRules;
-import com.azure.management.vanilla.storage.DeleteRetentionPolicy;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in FileServices. */
@@ -176,8 +174,7 @@ public final class FileServicesInner {
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param cors Sets the CORS rules. You can include up to five CorsRule elements in the request.
-     * @param shareDeleteRetentionPolicy The service properties for soft delete.
+     * @param parameters The properties of File services in storage account.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -185,14 +182,8 @@ public final class FileServicesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<FileServicePropertiesInner>> setServicePropertiesWithResponseAsync(
-        String resourceGroupName,
-        String accountName,
-        CorsRules cors,
-        DeleteRetentionPolicy shareDeleteRetentionPolicy) {
+        String resourceGroupName, String accountName, FileServicePropertiesInner parameters) {
         final String fileServicesName = "default";
-        FileServicePropertiesInner parameters = new FileServicePropertiesInner();
-        parameters.setCors(cors);
-        parameters.setShareDeleteRetentionPolicy(shareDeleteRetentionPolicy);
         return FluxUtil
             .withContext(
                 context ->
@@ -216,8 +207,7 @@ public final class FileServicesInner {
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param cors Sets the CORS rules. You can include up to five CorsRule elements in the request.
-     * @param shareDeleteRetentionPolicy The service properties for soft delete.
+     * @param parameters The properties of File services in storage account.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -225,11 +215,8 @@ public final class FileServicesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<FileServicePropertiesInner> setServicePropertiesAsync(
-        String resourceGroupName,
-        String accountName,
-        CorsRules cors,
-        DeleteRetentionPolicy shareDeleteRetentionPolicy) {
-        return setServicePropertiesWithResponseAsync(resourceGroupName, accountName, cors, shareDeleteRetentionPolicy)
+        String resourceGroupName, String accountName, FileServicePropertiesInner parameters) {
+        return setServicePropertiesWithResponseAsync(resourceGroupName, accountName, parameters)
             .flatMap(
                 (SimpleResponse<FileServicePropertiesInner> res) -> {
                     if (res.getValue() != null) {
@@ -247,8 +234,7 @@ public final class FileServicesInner {
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param cors Sets the CORS rules. You can include up to five CorsRule elements in the request.
-     * @param shareDeleteRetentionPolicy The service properties for soft delete.
+     * @param parameters The properties of File services in storage account.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -256,11 +242,8 @@ public final class FileServicesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FileServicePropertiesInner setServiceProperties(
-        String resourceGroupName,
-        String accountName,
-        CorsRules cors,
-        DeleteRetentionPolicy shareDeleteRetentionPolicy) {
-        return setServicePropertiesAsync(resourceGroupName, accountName, cors, shareDeleteRetentionPolicy).block();
+        String resourceGroupName, String accountName, FileServicePropertiesInner parameters) {
+        return setServicePropertiesAsync(resourceGroupName, accountName, parameters).block();
     }
 
     /**

@@ -24,8 +24,6 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.management.vanilla.storage.ErrorResponseException;
-import com.azure.management.vanilla.storage.PrivateEndpoint;
-import com.azure.management.vanilla.storage.PrivateLinkServiceConnectionState;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in PrivateEndpointConnections. */
@@ -192,9 +190,7 @@ public final class PrivateEndpointConnectionsInner {
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the Storage
      *     Account.
-     * @param privateEndpoint The Private Endpoint resource.
-     * @param privateLinkServiceConnectionState A collection of information about the state of the connection between
-     *     service consumer and provider.
+     * @param properties The Private Endpoint Connection resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -205,11 +201,7 @@ public final class PrivateEndpointConnectionsInner {
         String resourceGroupName,
         String accountName,
         String privateEndpointConnectionName,
-        PrivateEndpoint privateEndpoint,
-        PrivateLinkServiceConnectionState privateLinkServiceConnectionState) {
-        PrivateEndpointConnectionInner properties = new PrivateEndpointConnectionInner();
-        properties.setPrivateEndpoint(privateEndpoint);
-        properties.setPrivateLinkServiceConnectionState(privateLinkServiceConnectionState);
+        PrivateEndpointConnectionInner properties) {
         return FluxUtil
             .withContext(
                 context ->
@@ -235,9 +227,7 @@ public final class PrivateEndpointConnectionsInner {
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the Storage
      *     Account.
-     * @param privateEndpoint The Private Endpoint resource.
-     * @param privateLinkServiceConnectionState A collection of information about the state of the connection between
-     *     service consumer and provider.
+     * @param properties The Private Endpoint Connection resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -248,14 +238,8 @@ public final class PrivateEndpointConnectionsInner {
         String resourceGroupName,
         String accountName,
         String privateEndpointConnectionName,
-        PrivateEndpoint privateEndpoint,
-        PrivateLinkServiceConnectionState privateLinkServiceConnectionState) {
-        return putWithResponseAsync(
-                resourceGroupName,
-                accountName,
-                privateEndpointConnectionName,
-                privateEndpoint,
-                privateLinkServiceConnectionState)
+        PrivateEndpointConnectionInner properties) {
+        return putWithResponseAsync(resourceGroupName, accountName, privateEndpointConnectionName, properties)
             .flatMap(
                 (SimpleResponse<PrivateEndpointConnectionInner> res) -> {
                     if (res.getValue() != null) {
@@ -275,9 +259,7 @@ public final class PrivateEndpointConnectionsInner {
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
      * @param privateEndpointConnectionName The name of the private endpoint connection associated with the Storage
      *     Account.
-     * @param privateEndpoint The Private Endpoint resource.
-     * @param privateLinkServiceConnectionState A collection of information about the state of the connection between
-     *     service consumer and provider.
+     * @param properties The Private Endpoint Connection resource.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -288,15 +270,8 @@ public final class PrivateEndpointConnectionsInner {
         String resourceGroupName,
         String accountName,
         String privateEndpointConnectionName,
-        PrivateEndpoint privateEndpoint,
-        PrivateLinkServiceConnectionState privateLinkServiceConnectionState) {
-        return putAsync(
-                resourceGroupName,
-                accountName,
-                privateEndpointConnectionName,
-                privateEndpoint,
-                privateLinkServiceConnectionState)
-            .block();
+        PrivateEndpointConnectionInner properties) {
+        return putAsync(resourceGroupName, accountName, privateEndpointConnectionName, properties).block();
     }
 
     /**

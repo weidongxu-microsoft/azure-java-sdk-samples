@@ -36,7 +36,6 @@ import com.azure.management.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.management.resources.fluentcore.collection.InnerSupportsListing;
 import com.azure.management.vanilla.storage.AccountSasParameters;
 import com.azure.management.vanilla.storage.BlobRestoreParameters;
-import com.azure.management.vanilla.storage.BlobRestoreRange;
 import com.azure.management.vanilla.storage.ListKeyExpand;
 import com.azure.management.vanilla.storage.ServiceSasParameters;
 import com.azure.management.vanilla.storage.StorageAccountCheckNameAvailabilityParameters;
@@ -45,8 +44,6 @@ import com.azure.management.vanilla.storage.StorageAccountExpand;
 import com.azure.management.vanilla.storage.StorageAccountRegenerateKeyParameters;
 import com.azure.management.vanilla.storage.StorageAccountUpdateParameters;
 import java.nio.ByteBuffer;
-import java.time.OffsetDateTime;
-import java.util.List;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -1316,8 +1313,7 @@ public final class StorageAccountsInner
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param timeToRestore Restore blob to the specified time.
-     * @param blobRanges Blob ranges to restore.
+     * @param parameters Blob restore parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1325,10 +1321,7 @@ public final class StorageAccountsInner
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<Flux<ByteBuffer>>> restoreBlobRangesWithResponseAsync(
-        String resourceGroupName, String accountName, OffsetDateTime timeToRestore, List<BlobRestoreRange> blobRanges) {
-        BlobRestoreParameters parameters = new BlobRestoreParameters();
-        parameters.setTimeToRestore(timeToRestore);
-        parameters.setBlobRanges(blobRanges);
+        String resourceGroupName, String accountName, BlobRestoreParameters parameters) {
         return FluxUtil
             .withContext(
                 context ->
@@ -1351,8 +1344,7 @@ public final class StorageAccountsInner
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param timeToRestore Restore blob to the specified time.
-     * @param blobRanges Blob ranges to restore.
+     * @param parameters Blob restore parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1360,9 +1352,9 @@ public final class StorageAccountsInner
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BlobRestoreStatusInner> restoreBlobRangesAsync(
-        String resourceGroupName, String accountName, OffsetDateTime timeToRestore, List<BlobRestoreRange> blobRanges) {
+        String resourceGroupName, String accountName, BlobRestoreParameters parameters) {
         Mono<SimpleResponse<Flux<ByteBuffer>>> mono =
-            restoreBlobRangesWithResponseAsync(resourceGroupName, accountName, timeToRestore, blobRanges);
+            restoreBlobRangesWithResponseAsync(resourceGroupName, accountName, parameters);
         return this
             .client
             .<BlobRestoreStatusInner, BlobRestoreStatusInner>getLroResultAsync(
@@ -1378,8 +1370,7 @@ public final class StorageAccountsInner
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param timeToRestore Restore blob to the specified time.
-     * @param blobRanges Blob ranges to restore.
+     * @param parameters Blob restore parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1387,8 +1378,8 @@ public final class StorageAccountsInner
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BlobRestoreStatusInner restoreBlobRanges(
-        String resourceGroupName, String accountName, OffsetDateTime timeToRestore, List<BlobRestoreRange> blobRanges) {
-        return restoreBlobRangesAsync(resourceGroupName, accountName, timeToRestore, blobRanges).block();
+        String resourceGroupName, String accountName, BlobRestoreParameters parameters) {
+        return restoreBlobRangesAsync(resourceGroupName, accountName, parameters).block();
     }
 
     /**
@@ -1615,8 +1606,7 @@ public final class StorageAccountsInner
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param timeToRestore Restore blob to the specified time.
-     * @param blobRanges Blob ranges to restore.
+     * @param parameters Blob restore parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1624,10 +1614,7 @@ public final class StorageAccountsInner
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<BlobRestoreStatusInner>> beginRestoreBlobRangesWithResponseAsync(
-        String resourceGroupName, String accountName, OffsetDateTime timeToRestore, List<BlobRestoreRange> blobRanges) {
-        BlobRestoreParameters parameters = new BlobRestoreParameters();
-        parameters.setTimeToRestore(timeToRestore);
-        parameters.setBlobRanges(blobRanges);
+        String resourceGroupName, String accountName, BlobRestoreParameters parameters) {
         return FluxUtil
             .withContext(
                 context ->
@@ -1650,8 +1637,7 @@ public final class StorageAccountsInner
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param timeToRestore Restore blob to the specified time.
-     * @param blobRanges Blob ranges to restore.
+     * @param parameters Blob restore parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1659,8 +1645,8 @@ public final class StorageAccountsInner
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BlobRestoreStatusInner> beginRestoreBlobRangesAsync(
-        String resourceGroupName, String accountName, OffsetDateTime timeToRestore, List<BlobRestoreRange> blobRanges) {
-        return beginRestoreBlobRangesWithResponseAsync(resourceGroupName, accountName, timeToRestore, blobRanges)
+        String resourceGroupName, String accountName, BlobRestoreParameters parameters) {
+        return beginRestoreBlobRangesWithResponseAsync(resourceGroupName, accountName, parameters)
             .flatMap(
                 (SimpleResponse<BlobRestoreStatusInner> res) -> {
                     if (res.getValue() != null) {
@@ -1678,8 +1664,7 @@ public final class StorageAccountsInner
      *     insensitive.
      * @param accountName The name of the storage account within the specified resource group. Storage account names
      *     must be between 3 and 24 characters in length and use numbers and lower-case letters only.
-     * @param timeToRestore Restore blob to the specified time.
-     * @param blobRanges Blob ranges to restore.
+     * @param parameters Blob restore parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1687,8 +1672,8 @@ public final class StorageAccountsInner
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BlobRestoreStatusInner beginRestoreBlobRanges(
-        String resourceGroupName, String accountName, OffsetDateTime timeToRestore, List<BlobRestoreRange> blobRanges) {
-        return beginRestoreBlobRangesAsync(resourceGroupName, accountName, timeToRestore, blobRanges).block();
+        String resourceGroupName, String accountName, BlobRestoreParameters parameters) {
+        return beginRestoreBlobRangesAsync(resourceGroupName, accountName, parameters).block();
     }
 
     /**

@@ -29,7 +29,6 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.management.CloudException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /** An instance of this class provides access to all the operations defined in FileShares. */
@@ -281,9 +280,7 @@ public final class FileSharesInner {
      * @param shareName The name of the file share within the specified storage account. File share names must be
      *     between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-)
      *     character must be immediately preceded and followed by a letter or number.
-     * @param metadata A name-value pair to associate with the share as metadata.
-     * @param shareQuota The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to
-     *     5TB (5120). For Large File Shares, the maximum size is 102400.
+     * @param fileShare Properties of the file share, including Id, resource name, resource type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -291,14 +288,7 @@ public final class FileSharesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<FileShareInner>> createWithResponseAsync(
-        String resourceGroupName,
-        String accountName,
-        String shareName,
-        Map<String, String> metadata,
-        Integer shareQuota) {
-        FileShareInner fileShare = new FileShareInner();
-        fileShare.setMetadata(metadata);
-        fileShare.setShareQuota(shareQuota);
+        String resourceGroupName, String accountName, String shareName, FileShareInner fileShare) {
         return FluxUtil
             .withContext(
                 context ->
@@ -326,9 +316,7 @@ public final class FileSharesInner {
      * @param shareName The name of the file share within the specified storage account. File share names must be
      *     between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-)
      *     character must be immediately preceded and followed by a letter or number.
-     * @param metadata A name-value pair to associate with the share as metadata.
-     * @param shareQuota The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to
-     *     5TB (5120). For Large File Shares, the maximum size is 102400.
+     * @param fileShare Properties of the file share, including Id, resource name, resource type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -336,12 +324,8 @@ public final class FileSharesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<FileShareInner> createAsync(
-        String resourceGroupName,
-        String accountName,
-        String shareName,
-        Map<String, String> metadata,
-        Integer shareQuota) {
-        return createWithResponseAsync(resourceGroupName, accountName, shareName, metadata, shareQuota)
+        String resourceGroupName, String accountName, String shareName, FileShareInner fileShare) {
+        return createWithResponseAsync(resourceGroupName, accountName, shareName, fileShare)
             .flatMap(
                 (SimpleResponse<FileShareInner> res) -> {
                     if (res.getValue() != null) {
@@ -363,9 +347,7 @@ public final class FileSharesInner {
      * @param shareName The name of the file share within the specified storage account. File share names must be
      *     between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-)
      *     character must be immediately preceded and followed by a letter or number.
-     * @param metadata A name-value pair to associate with the share as metadata.
-     * @param shareQuota The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to
-     *     5TB (5120). For Large File Shares, the maximum size is 102400.
+     * @param fileShare Properties of the file share, including Id, resource name, resource type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -373,12 +355,8 @@ public final class FileSharesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FileShareInner create(
-        String resourceGroupName,
-        String accountName,
-        String shareName,
-        Map<String, String> metadata,
-        Integer shareQuota) {
-        return createAsync(resourceGroupName, accountName, shareName, metadata, shareQuota).block();
+        String resourceGroupName, String accountName, String shareName, FileShareInner fileShare) {
+        return createAsync(resourceGroupName, accountName, shareName, fileShare).block();
     }
 
     /**
@@ -392,9 +370,7 @@ public final class FileSharesInner {
      * @param shareName The name of the file share within the specified storage account. File share names must be
      *     between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-)
      *     character must be immediately preceded and followed by a letter or number.
-     * @param metadata A name-value pair to associate with the share as metadata.
-     * @param shareQuota The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to
-     *     5TB (5120). For Large File Shares, the maximum size is 102400.
+     * @param fileShare Properties of the file share, including Id, resource name, resource type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -402,14 +378,7 @@ public final class FileSharesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<SimpleResponse<FileShareInner>> updateWithResponseAsync(
-        String resourceGroupName,
-        String accountName,
-        String shareName,
-        Map<String, String> metadata,
-        Integer shareQuota) {
-        FileShareInner fileShare = new FileShareInner();
-        fileShare.setMetadata(metadata);
-        fileShare.setShareQuota(shareQuota);
+        String resourceGroupName, String accountName, String shareName, FileShareInner fileShare) {
         return FluxUtil
             .withContext(
                 context ->
@@ -437,9 +406,7 @@ public final class FileSharesInner {
      * @param shareName The name of the file share within the specified storage account. File share names must be
      *     between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-)
      *     character must be immediately preceded and followed by a letter or number.
-     * @param metadata A name-value pair to associate with the share as metadata.
-     * @param shareQuota The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to
-     *     5TB (5120). For Large File Shares, the maximum size is 102400.
+     * @param fileShare Properties of the file share, including Id, resource name, resource type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -447,12 +414,8 @@ public final class FileSharesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<FileShareInner> updateAsync(
-        String resourceGroupName,
-        String accountName,
-        String shareName,
-        Map<String, String> metadata,
-        Integer shareQuota) {
-        return updateWithResponseAsync(resourceGroupName, accountName, shareName, metadata, shareQuota)
+        String resourceGroupName, String accountName, String shareName, FileShareInner fileShare) {
+        return updateWithResponseAsync(resourceGroupName, accountName, shareName, fileShare)
             .flatMap(
                 (SimpleResponse<FileShareInner> res) -> {
                     if (res.getValue() != null) {
@@ -474,9 +437,7 @@ public final class FileSharesInner {
      * @param shareName The name of the file share within the specified storage account. File share names must be
      *     between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-)
      *     character must be immediately preceded and followed by a letter or number.
-     * @param metadata A name-value pair to associate with the share as metadata.
-     * @param shareQuota The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to
-     *     5TB (5120). For Large File Shares, the maximum size is 102400.
+     * @param fileShare Properties of the file share, including Id, resource name, resource type, Etag.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -484,12 +445,8 @@ public final class FileSharesInner {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FileShareInner update(
-        String resourceGroupName,
-        String accountName,
-        String shareName,
-        Map<String, String> metadata,
-        Integer shareQuota) {
-        return updateAsync(resourceGroupName, accountName, shareName, metadata, shareQuota).block();
+        String resourceGroupName, String accountName, String shareName, FileShareInner fileShare) {
+        return updateAsync(resourceGroupName, accountName, shareName, fileShare).block();
     }
 
     /**
