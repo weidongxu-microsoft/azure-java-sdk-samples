@@ -57,7 +57,8 @@ public class StorageAccountSampleVanilla {
 
         // lease on container
         LeaseContainerResponseInner leaseResponse = client.blobContainers().lease(context.resourceGroup(), saName, "container1",
-                new LeaseContainerRequest().setLeaseDuration(15));
+                new LeaseContainerRequest()
+                        .setLeaseDuration(15));
 
         context.logger().info("container lease duration: {}", leaseResponse.getLeaseTimeSeconds());
 
