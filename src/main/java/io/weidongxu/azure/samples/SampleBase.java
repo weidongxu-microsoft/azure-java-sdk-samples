@@ -10,6 +10,7 @@ import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.AzureEnvironment;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.management.vanilla.resources.models.ResourceGroupInner;
 import com.azure.management.vanilla.resources.models.ResourceManagementClientBuilder;
@@ -20,6 +21,8 @@ import com.microsoft.azure.credentials.AzureTokenCredentials;
 import java.util.Objects;
 
 public class SampleBase implements ResourceContext {
+
+    protected final ClientLogger logger = new ClientLogger(this.getClass());
 
     protected final String rgName;
     protected final String location = "southcentralus";
@@ -92,5 +95,10 @@ public class SampleBase implements ResourceContext {
     @Override
     public String location() {
         return location;
+    }
+
+    @Override
+    public ClientLogger logger() {
+        return logger;
     }
 }
