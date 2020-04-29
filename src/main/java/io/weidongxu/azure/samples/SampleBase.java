@@ -7,6 +7,7 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.AzureEnvironment;
@@ -51,7 +52,7 @@ public class SampleBase implements ResourceContext {
     protected HttpPipeline httpPipeline() {
         if (httpPipeline == null) {
             httpPipeline = new HttpPipelineBuilder()
-                    .policies(new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy(),
+                    .policies(new RequestIdPolicy(), new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy(),
                             new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC)),
                             new BearerTokenAuthenticationPolicy(new DefaultAzureCredentialBuilder().build(),
                                     AzureEnvironment.AZURE.getManagementEndpoint() + ".default"))
