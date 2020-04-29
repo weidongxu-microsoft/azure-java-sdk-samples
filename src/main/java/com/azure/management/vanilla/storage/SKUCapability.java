@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The SKUCapability model. */
+/** The SkuCapability model. */
 @Immutable
-public final class SKUCapability {
+public final class SkuCapability {
+    private final ClientLogger logger = new ClientLogger(SkuCapability.class);
+
     /*
      * The name of capability, The capability information in the specified SKU,
      * including file encryption, network ACLs, change notification, etc.
@@ -41,5 +44,13 @@ public final class SKUCapability {
      */
     public String getValue() {
         return this.value;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

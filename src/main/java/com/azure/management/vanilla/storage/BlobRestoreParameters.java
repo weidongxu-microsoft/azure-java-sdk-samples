@@ -5,6 +5,7 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -12,6 +13,8 @@ import java.util.List;
 /** The BlobRestoreParameters model. */
 @Fluent
 public final class BlobRestoreParameters {
+    private final ClientLogger logger = new ClientLogger(BlobRestoreParameters.class);
+
     /*
      * Restore blob to the specified time.
      */
@@ -62,5 +65,27 @@ public final class BlobRestoreParameters {
     public BlobRestoreParameters setBlobRanges(List<BlobRestoreRange> blobRanges) {
         this.blobRanges = blobRanges;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getTimeToRestore() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property timeToRestore in model BlobRestoreParameters"));
+        }
+        if (getBlobRanges() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property blobRanges in model BlobRestoreParameters"));
+        } else {
+            getBlobRanges().forEach(e -> e.validate());
+        }
     }
 }

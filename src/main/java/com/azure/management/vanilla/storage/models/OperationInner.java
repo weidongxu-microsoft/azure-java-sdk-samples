@@ -6,6 +6,7 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.OperationDisplay;
 import com.azure.management.vanilla.storage.ServiceSpecification;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonFlatten
 @Fluent
 public class OperationInner {
+    private final ClientLogger logger = new ClientLogger(OperationInner.class);
+
     /*
      * Operation name: {provider}/{resource}/{operation}
      */
@@ -116,5 +119,19 @@ public class OperationInner {
     public OperationInner setServiceSpecification(ServiceSpecification serviceSpecification) {
         this.serviceSpecification = serviceSpecification;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getDisplay() != null) {
+            getDisplay().validate();
+        }
+        if (getServiceSpecification() != null) {
+            getServiceSpecification().validate();
+        }
     }
 }

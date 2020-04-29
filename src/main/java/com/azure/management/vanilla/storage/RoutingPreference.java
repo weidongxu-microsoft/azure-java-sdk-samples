@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The RoutingPreference model. */
 @Fluent
 public final class RoutingPreference {
+    private final ClientLogger logger = new ClientLogger(RoutingPreference.class);
+
     /*
      * Routing Choice defines the kind of network routing opted by the user.
      */
@@ -92,5 +95,13 @@ public final class RoutingPreference {
     public RoutingPreference setPublishInternetEndpoints(Boolean publishInternetEndpoints) {
         this.publishInternetEndpoints = publishInternetEndpoints;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

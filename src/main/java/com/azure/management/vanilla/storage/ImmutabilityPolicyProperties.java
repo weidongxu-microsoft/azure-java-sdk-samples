@@ -6,6 +6,7 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import java.util.List;
 @JsonFlatten
 @Fluent
 public class ImmutabilityPolicyProperties {
+    private final ClientLogger logger = new ClientLogger(ImmutabilityPolicyProperties.class);
+
     /*
      * ImmutabilityPolicy Etag.
      */
@@ -125,5 +128,16 @@ public class ImmutabilityPolicyProperties {
     public ImmutabilityPolicyProperties setAllowProtectedAppendWrites(Boolean allowProtectedAppendWrites) {
         this.allowProtectedAppendWrites = allowProtectedAppendWrites;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getUpdateHistory() != null) {
+            getUpdateHistory().forEach(e -> e.validate());
+        }
     }
 }

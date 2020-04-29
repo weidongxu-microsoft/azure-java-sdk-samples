@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The ListContainerItems model. */
 @Immutable
 public final class ListContainerItemsInner {
+    private final ClientLogger logger = new ClientLogger(ListContainerItemsInner.class);
+
     /*
      * List of blobs containers returned.
      */
@@ -41,5 +44,16 @@ public final class ListContainerItemsInner {
      */
     public String getNextLink() {
         return this.nextLink;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getValue() != null) {
+            getValue().forEach(e -> e.validate());
+        }
     }
 }

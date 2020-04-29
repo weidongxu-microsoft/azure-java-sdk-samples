@@ -6,6 +6,7 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.AzureEntityResource;
 import com.azure.management.vanilla.storage.ImmutabilityPolicyState;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonFlatten
 @Fluent
 public class ImmutabilityPolicyInner extends AzureEntityResource {
+    private final ClientLogger logger = new ClientLogger(ImmutabilityPolicyInner.class);
+
     /*
      * The immutability period for the blobs in the container since the policy
      * creation, in days.
@@ -96,5 +99,15 @@ public class ImmutabilityPolicyInner extends AzureEntityResource {
     public ImmutabilityPolicyInner setAllowProtectedAppendWrites(Boolean allowProtectedAppendWrites) {
         this.allowProtectedAppendWrites = allowProtectedAppendWrites;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    @Override
+    public void validate() {
+        super.validate();
     }
 }

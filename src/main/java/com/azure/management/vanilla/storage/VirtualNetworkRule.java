@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The VirtualNetworkRule model. */
 @Fluent
 public final class VirtualNetworkRule {
+    private final ClientLogger logger = new ClientLogger(VirtualNetworkRule.class);
+
     /*
      * Resource ID of a subnet, for example:
      * /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.
@@ -89,5 +92,19 @@ public final class VirtualNetworkRule {
     public VirtualNetworkRule setState(State state) {
         this.state = state;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getVirtualNetworkResourceId() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property virtualNetworkResourceId in model VirtualNetworkRule"));
+        }
     }
 }

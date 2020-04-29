@@ -7,6 +7,7 @@ package com.azure.management.vanilla.storage.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.Resource;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.AccessTier;
 import com.azure.management.vanilla.storage.AccountStatus;
 import com.azure.management.vanilla.storage.AzureFilesIdentityBasedAuthentication;
@@ -29,6 +30,8 @@ import java.util.List;
 @JsonFlatten
 @Fluent
 public class StorageAccountInner extends Resource {
+    private final ClientLogger logger = new ClientLogger(StorageAccountInner.class);
+
     /*
      * Gets the SKU.
      */
@@ -506,5 +509,49 @@ public class StorageAccountInner extends Resource {
      */
     public BlobRestoreStatusInner getBlobRestoreStatus() {
         return this.blobRestoreStatus;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getSku() != null) {
+            getSku().validate();
+        }
+        if (getIdentity() != null) {
+            getIdentity().validate();
+        }
+        if (getPrimaryEndpoints() != null) {
+            getPrimaryEndpoints().validate();
+        }
+        if (getCustomDomain() != null) {
+            getCustomDomain().validate();
+        }
+        if (getSecondaryEndpoints() != null) {
+            getSecondaryEndpoints().validate();
+        }
+        if (getEncryption() != null) {
+            getEncryption().validate();
+        }
+        if (getAzureFilesIdentityBasedAuthentication() != null) {
+            getAzureFilesIdentityBasedAuthentication().validate();
+        }
+        if (getNetworkRuleSet() != null) {
+            getNetworkRuleSet().validate();
+        }
+        if (getGeoReplicationStats() != null) {
+            getGeoReplicationStats().validate();
+        }
+        if (getPrivateEndpointConnections() != null) {
+            getPrivateEndpointConnections().forEach(e -> e.validate());
+        }
+        if (getRoutingPreference() != null) {
+            getRoutingPreference().validate();
+        }
+        if (getBlobRestoreStatus() != null) {
+            getBlobRestoreStatus().validate();
+        }
     }
 }

@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The StorageAccountRegenerateKeyParameters model. */
 @Fluent
 public final class StorageAccountRegenerateKeyParameters {
+    private final ClientLogger logger = new ClientLogger(StorageAccountRegenerateKeyParameters.class);
+
     /*
      * The name of storage keys that want to be regenerated, possible values
      * are key1, key2, kerb1, kerb2.
@@ -37,5 +40,19 @@ public final class StorageAccountRegenerateKeyParameters {
     public StorageAccountRegenerateKeyParameters setKeyName(String keyName) {
         this.keyName = keyName;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getKeyName() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property keyName in model StorageAccountRegenerateKeyParameters"));
+        }
     }
 }

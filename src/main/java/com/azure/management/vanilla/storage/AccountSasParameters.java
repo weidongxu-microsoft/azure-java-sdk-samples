@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The AccountSasParameters model. */
 @Fluent
 public final class AccountSasParameters {
+    private final ClientLogger logger = new ClientLogger(AccountSasParameters.class);
+
     /*
      * The signed services accessible with the account SAS. Possible values
      * include: Blob (b), Queue (q), Table (t), File (f).
@@ -39,7 +42,7 @@ public final class AccountSasParameters {
      * An IP address or a range of IP addresses from which to accept requests.
      */
     @JsonProperty(value = "signedIp")
-    private String iPAddressOrRange;
+    private String ipAddressOrRange;
 
     /*
      * The protocol permitted for a request made with the account SAS.
@@ -134,22 +137,22 @@ public final class AccountSasParameters {
     }
 
     /**
-     * Get the iPAddressOrRange property: An IP address or a range of IP addresses from which to accept requests.
+     * Get the ipAddressOrRange property: An IP address or a range of IP addresses from which to accept requests.
      *
-     * @return the iPAddressOrRange value.
+     * @return the ipAddressOrRange value.
      */
-    public String getIPAddressOrRange() {
-        return this.iPAddressOrRange;
+    public String getIpAddressOrRange() {
+        return this.ipAddressOrRange;
     }
 
     /**
-     * Set the iPAddressOrRange property: An IP address or a range of IP addresses from which to accept requests.
+     * Set the ipAddressOrRange property: An IP address or a range of IP addresses from which to accept requests.
      *
-     * @param iPAddressOrRange the iPAddressOrRange value to set.
+     * @param ipAddressOrRange the ipAddressOrRange value to set.
      * @return the AccountSasParameters object itself.
      */
-    public AccountSasParameters setIPAddressOrRange(String iPAddressOrRange) {
-        this.iPAddressOrRange = iPAddressOrRange;
+    public AccountSasParameters setIpAddressOrRange(String ipAddressOrRange) {
+        this.ipAddressOrRange = ipAddressOrRange;
         return this;
     }
 
@@ -231,5 +234,36 @@ public final class AccountSasParameters {
     public AccountSasParameters setKeyToSign(String keyToSign) {
         this.keyToSign = keyToSign;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getServices() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException("Missing required property services in model AccountSasParameters"));
+        }
+        if (getResourceTypes() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property resourceTypes in model AccountSasParameters"));
+        }
+        if (getPermissions() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property permissions in model AccountSasParameters"));
+        }
+        if (getSharedAccessExpiryTime() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property sharedAccessExpiryTime in model AccountSasParameters"));
+        }
     }
 }

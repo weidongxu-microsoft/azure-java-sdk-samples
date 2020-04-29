@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ObjectReplicationPolicyRule model. */
 @Fluent
 public final class ObjectReplicationPolicyRule {
+    private final ClientLogger logger = new ClientLogger(ObjectReplicationPolicyRule.class);
+
     /*
      * Rule Id is auto-generated for each new rule on destination account. It
      * is required for put policy on source account.
@@ -115,5 +118,28 @@ public final class ObjectReplicationPolicyRule {
     public ObjectReplicationPolicyRule setFilters(ObjectReplicationPolicyFilter filters) {
         this.filters = filters;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getSourceContainer() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property sourceContainer in model ObjectReplicationPolicyRule"));
+        }
+        if (getDestinationContainer() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property destinationContainer in model ObjectReplicationPolicyRule"));
+        }
+        if (getFilters() != null) {
+            getFilters().validate();
+        }
     }
 }

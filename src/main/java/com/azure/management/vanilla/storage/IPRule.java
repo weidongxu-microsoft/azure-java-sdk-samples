@@ -5,17 +5,20 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The IPRule model. */
+/** The IpRule model. */
 @Fluent
-public final class IPRule {
+public final class IpRule {
+    private final ClientLogger logger = new ClientLogger(IpRule.class);
+
     /*
      * Specifies the IP or IP range in CIDR format. Only IPV4 address is
      * allowed.
      */
     @JsonProperty(value = "value", required = true)
-    private String iPAddressOrRange;
+    private String ipAddressOrRange;
 
     /*
      * The action of IP ACL rule.
@@ -24,22 +27,22 @@ public final class IPRule {
     private Action action;
 
     /**
-     * Get the iPAddressOrRange property: Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
+     * Get the ipAddressOrRange property: Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
      *
-     * @return the iPAddressOrRange value.
+     * @return the ipAddressOrRange value.
      */
-    public String getIPAddressOrRange() {
-        return this.iPAddressOrRange;
+    public String getIpAddressOrRange() {
+        return this.ipAddressOrRange;
     }
 
     /**
-     * Set the iPAddressOrRange property: Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
+     * Set the ipAddressOrRange property: Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
      *
-     * @param iPAddressOrRange the iPAddressOrRange value to set.
-     * @return the IPRule object itself.
+     * @param ipAddressOrRange the ipAddressOrRange value to set.
+     * @return the IpRule object itself.
      */
-    public IPRule setIPAddressOrRange(String iPAddressOrRange) {
-        this.iPAddressOrRange = iPAddressOrRange;
+    public IpRule setIpAddressOrRange(String ipAddressOrRange) {
+        this.ipAddressOrRange = ipAddressOrRange;
         return this;
     }
 
@@ -56,10 +59,23 @@ public final class IPRule {
      * Set the action property: The action of IP ACL rule.
      *
      * @param action the action value to set.
-     * @return the IPRule object itself.
+     * @return the IpRule object itself.
      */
-    public IPRule setAction(Action action) {
+    public IpRule setAction(Action action) {
         this.action = action;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getIpAddressOrRange() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException("Missing required property ipAddressOrRange in model IpRule"));
+        }
     }
 }

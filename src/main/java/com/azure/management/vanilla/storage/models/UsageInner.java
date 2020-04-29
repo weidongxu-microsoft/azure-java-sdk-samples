@@ -5,6 +5,7 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.UsageName;
 import com.azure.management.vanilla.storage.UsageUnit;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /** The Usage model. */
 @Immutable
 public final class UsageInner {
+    private final ClientLogger logger = new ClientLogger(UsageInner.class);
+
     /*
      * Gets the unit of measurement.
      */
@@ -71,5 +74,16 @@ public final class UsageInner {
      */
     public UsageName getName() {
         return this.name;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getName() != null) {
+            getName().validate();
+        }
     }
 }

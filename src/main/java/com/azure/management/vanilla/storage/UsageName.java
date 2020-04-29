@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The UsageName model. */
 @Immutable
 public final class UsageName {
+    private final ClientLogger logger = new ClientLogger(UsageName.class);
+
     /*
      * Gets a string describing the resource name.
      */
@@ -38,5 +41,13 @@ public final class UsageName {
      */
     public String getLocalizedValue() {
         return this.localizedValue;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

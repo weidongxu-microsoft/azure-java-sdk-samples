@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The PrivateEndpoint model. */
 @Immutable
 public final class PrivateEndpoint {
+    private final ClientLogger logger = new ClientLogger(PrivateEndpoint.class);
+
     /*
      * The ARM identifier for Private Endpoint
      */
@@ -23,5 +26,13 @@ public final class PrivateEndpoint {
      */
     public String getId() {
         return this.id;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

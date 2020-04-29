@@ -7,6 +7,7 @@ package com.azure.management.vanilla.storage;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.ProxyResource;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import java.util.List;
 @JsonFlatten
 @Fluent
 public class PrivateLinkResource extends ProxyResource {
+    private final ClientLogger logger = new ClientLogger(PrivateLinkResource.class);
+
     /*
      * The private link resource group id.
      */
@@ -68,5 +71,13 @@ public class PrivateLinkResource extends ProxyResource {
     public PrivateLinkResource setRequiredZoneNames(List<String> requiredZoneNames) {
         this.requiredZoneNames = requiredZoneNames;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

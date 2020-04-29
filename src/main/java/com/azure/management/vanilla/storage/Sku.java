@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Sku model. */
 @Fluent
 public final class Sku {
+    private final ClientLogger logger = new ClientLogger(Sku.class);
+
     /*
      * The SKU name. Required for account creation; optional for update. Note
      * that in older versions, SKU name was called accountType.
@@ -52,5 +55,17 @@ public final class Sku {
      */
     public SkuTier getTier() {
         return this.tier;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getName() == null) {
+            throw logger
+                .logExceptionAsError(new IllegalArgumentException("Missing required property name in model Sku"));
+        }
     }
 }

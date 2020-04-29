@@ -6,6 +6,7 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
@@ -13,6 +14,8 @@ import java.util.Map;
 @JsonFlatten
 @Fluent
 public class StorageAccountUpdateParameters {
+    private final ClientLogger logger = new ClientLogger(StorageAccountUpdateParameters.class);
+
     /*
      * Gets or sets the SKU name. Note that the SKU name cannot be updated to
      * Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU
@@ -360,5 +363,34 @@ public class StorageAccountUpdateParameters {
     public StorageAccountUpdateParameters setRoutingPreference(RoutingPreference routingPreference) {
         this.routingPreference = routingPreference;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getSku() != null) {
+            getSku().validate();
+        }
+        if (getIdentity() != null) {
+            getIdentity().validate();
+        }
+        if (getCustomDomain() != null) {
+            getCustomDomain().validate();
+        }
+        if (getEncryption() != null) {
+            getEncryption().validate();
+        }
+        if (getAzureFilesIdentityBasedAuthentication() != null) {
+            getAzureFilesIdentityBasedAuthentication().validate();
+        }
+        if (getNetworkRuleSet() != null) {
+            getNetworkRuleSet().validate();
+        }
+        if (getRoutingPreference() != null) {
+            getRoutingPreference().validate();
+        }
     }
 }

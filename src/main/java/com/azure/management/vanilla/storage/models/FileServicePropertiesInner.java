@@ -7,6 +7,7 @@ package com.azure.management.vanilla.storage.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.ProxyResource;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.CorsRules;
 import com.azure.management.vanilla.storage.DeleteRetentionPolicy;
 import com.azure.management.vanilla.storage.Sku;
@@ -16,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonFlatten
 @Fluent
 public class FileServicePropertiesInner extends ProxyResource {
+    private final ClientLogger logger = new ClientLogger(FileServicePropertiesInner.class);
+
     /*
      * Sku name and tier.
      */
@@ -88,5 +91,22 @@ public class FileServicePropertiesInner extends ProxyResource {
     public FileServicePropertiesInner setShareDeleteRetentionPolicy(DeleteRetentionPolicy shareDeleteRetentionPolicy) {
         this.shareDeleteRetentionPolicy = shareDeleteRetentionPolicy;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getSku() != null) {
+            getSku().validate();
+        }
+        if (getCors() != null) {
+            getCors().validate();
+        }
+        if (getShareDeleteRetentionPolicy() != null) {
+            getShareDeleteRetentionPolicy().validate();
+        }
     }
 }

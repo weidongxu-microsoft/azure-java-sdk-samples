@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The BlobServiceItems model. */
 @Immutable
 public final class BlobServiceItemsInner {
+    private final ClientLogger logger = new ClientLogger(BlobServiceItemsInner.class);
+
     /*
      * List of blob services returned.
      */
@@ -24,5 +27,16 @@ public final class BlobServiceItemsInner {
      */
     public List<BlobServicePropertiesInner> getValue() {
         return this.value;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getValue() != null) {
+            getValue().forEach(e -> e.validate());
+        }
     }
 }

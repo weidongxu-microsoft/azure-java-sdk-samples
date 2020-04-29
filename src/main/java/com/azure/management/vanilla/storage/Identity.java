@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Identity model. */
 @Fluent
 public final class Identity {
+    private final ClientLogger logger = new ClientLogger(Identity.class);
+
     /*
      * The principal ID of resource identity.
      */
@@ -69,5 +72,13 @@ public final class Identity {
     public Identity setType(String type) {
         this.type = type;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

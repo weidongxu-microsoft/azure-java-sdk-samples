@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The FileServiceItems model. */
 @Immutable
 public final class FileServiceItemsInner {
+    private final ClientLogger logger = new ClientLogger(FileServiceItemsInner.class);
+
     /*
      * List of file services returned.
      */
@@ -24,5 +27,16 @@ public final class FileServiceItemsInner {
      */
     public List<FileServicePropertiesInner> getValue() {
         return this.value;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getValue() != null) {
+            getValue().forEach(e -> e.validate());
+        }
     }
 }

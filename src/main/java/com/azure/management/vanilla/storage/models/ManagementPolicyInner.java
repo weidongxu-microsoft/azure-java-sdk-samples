@@ -7,6 +7,7 @@ package com.azure.management.vanilla.storage.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.ProxyResource;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.ManagementPolicySchema;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -15,6 +16,8 @@ import java.time.OffsetDateTime;
 @JsonFlatten
 @Fluent
 public class ManagementPolicyInner extends ProxyResource {
+    private final ClientLogger logger = new ClientLogger(ManagementPolicyInner.class);
+
     /*
      * Returns the date and time the ManagementPolicies was last modified.
      */
@@ -58,5 +61,16 @@ public class ManagementPolicyInner extends ProxyResource {
     public ManagementPolicyInner setPolicy(ManagementPolicySchema policy) {
         this.policy = policy;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getPolicy() != null) {
+            getPolicy().validate();
+        }
     }
 }

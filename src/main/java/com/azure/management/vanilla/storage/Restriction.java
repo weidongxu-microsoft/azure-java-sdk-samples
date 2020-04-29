@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The Restriction model. */
 @Fluent
 public final class Restriction {
+    private final ClientLogger logger = new ClientLogger(Restriction.class);
+
     /*
      * The type of restrictions. As of now only possible value for this is
      * location.
@@ -75,5 +78,13 @@ public final class Restriction {
     public Restriction setReasonCode(ReasonCode reasonCode) {
         this.reasonCode = reasonCode;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

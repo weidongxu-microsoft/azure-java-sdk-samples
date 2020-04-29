@@ -6,6 +6,7 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.AzureEntityResource;
 import com.azure.management.vanilla.storage.ImmutabilityPolicyProperties;
 import com.azure.management.vanilla.storage.LeaseDuration;
@@ -21,6 +22,8 @@ import java.util.Map;
 @JsonFlatten
 @Fluent
 public class BlobContainerInner extends AzureEntityResource {
+    private final ClientLogger logger = new ClientLogger(BlobContainerInner.class);
+
     /*
      * Default the container to use specified encryption scope for all writes.
      */
@@ -259,5 +262,21 @@ public class BlobContainerInner extends AzureEntityResource {
      */
     public Boolean isHasImmutabilityPolicy() {
         return this.hasImmutabilityPolicy;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    @Override
+    public void validate() {
+        super.validate();
+        if (getImmutabilityPolicy() != null) {
+            getImmutabilityPolicy().validate();
+        }
+        if (getLegalHold() != null) {
+            getLegalHold().validate();
+        }
     }
 }

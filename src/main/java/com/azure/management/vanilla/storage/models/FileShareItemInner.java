@@ -6,6 +6,7 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.AzureEntityResource;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -15,6 +16,8 @@ import java.util.Map;
 @JsonFlatten
 @Fluent
 public class FileShareItemInner extends AzureEntityResource {
+    private final ClientLogger logger = new ClientLogger(FileShareItemInner.class);
+
     /*
      * Returns the date and time the share was last modified.
      */
@@ -84,5 +87,15 @@ public class FileShareItemInner extends AzureEntityResource {
     public FileShareItemInner setShareQuota(Integer shareQuota) {
         this.shareQuota = shareQuota;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    @Override
+    public void validate() {
+        super.validate();
     }
 }

@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The OperationListResult model. */
 @Fluent
 public final class OperationListResultInner {
+    private final ClientLogger logger = new ClientLogger(OperationListResultInner.class);
+
     /*
      * List of Storage operations supported by the Storage resource provider.
      */
@@ -35,5 +38,16 @@ public final class OperationListResultInner {
     public OperationListResultInner setValue(List<OperationInner> value) {
         this.value = value;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getValue() != null) {
+            getValue().forEach(e -> e.validate());
+        }
     }
 }

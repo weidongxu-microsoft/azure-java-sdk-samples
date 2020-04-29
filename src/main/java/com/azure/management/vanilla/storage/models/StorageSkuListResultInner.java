@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The StorageSkuListResult model. */
 @Immutable
 public final class StorageSkuListResultInner {
+    private final ClientLogger logger = new ClientLogger(StorageSkuListResultInner.class);
+
     /*
      * Get the list result of storage SKUs and their properties.
      */
@@ -24,5 +27,16 @@ public final class StorageSkuListResultInner {
      */
     public List<SkuInformationInner> getValue() {
         return this.value;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getValue() != null) {
+            getValue().forEach(e -> e.validate());
+        }
     }
 }

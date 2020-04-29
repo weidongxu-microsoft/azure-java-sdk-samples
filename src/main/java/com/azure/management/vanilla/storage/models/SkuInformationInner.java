@@ -5,9 +5,10 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.Kind;
 import com.azure.management.vanilla.storage.Restriction;
-import com.azure.management.vanilla.storage.SKUCapability;
+import com.azure.management.vanilla.storage.SkuCapability;
 import com.azure.management.vanilla.storage.SkuName;
 import com.azure.management.vanilla.storage.SkuTier;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,6 +17,8 @@ import java.util.List;
 /** The SkuInformation model. */
 @Fluent
 public final class SkuInformationInner {
+    private final ClientLogger logger = new ClientLogger(SkuInformationInner.class);
+
     /*
      * The SKU name. Required for account creation; optional for update. Note
      * that in older versions, SKU name was called accountType.
@@ -54,7 +57,7 @@ public final class SkuInformationInner {
      * encryption, network ACLs, change notification, etc.
      */
     @JsonProperty(value = "capabilities", access = JsonProperty.Access.WRITE_ONLY)
-    private List<SKUCapability> capabilities;
+    private List<SkuCapability> capabilities;
 
     /*
      * The restrictions because of which SKU cannot be used. This is empty if
@@ -128,7 +131,7 @@ public final class SkuInformationInner {
      *
      * @return the capabilities value.
      */
-    public List<SKUCapability> getCapabilities() {
+    public List<SkuCapability> getCapabilities() {
         return this.capabilities;
     }
 
@@ -152,5 +155,24 @@ public final class SkuInformationInner {
     public SkuInformationInner setRestrictions(List<Restriction> restrictions) {
         this.restrictions = restrictions;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getName() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException("Missing required property name in model SkuInformationInner"));
+        }
+        if (getCapabilities() != null) {
+            getCapabilities().forEach(e -> e.validate());
+        }
+        if (getRestrictions() != null) {
+            getRestrictions().forEach(e -> e.validate());
+        }
     }
 }

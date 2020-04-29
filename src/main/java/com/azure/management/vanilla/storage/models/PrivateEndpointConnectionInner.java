@@ -7,6 +7,7 @@ package com.azure.management.vanilla.storage.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.ProxyResource;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.PrivateEndpoint;
 import com.azure.management.vanilla.storage.PrivateEndpointConnectionProvisioningState;
 import com.azure.management.vanilla.storage.PrivateLinkServiceConnectionState;
@@ -16,6 +17,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonFlatten
 @Fluent
 public class PrivateEndpointConnectionInner extends ProxyResource {
+    private final ClientLogger logger = new ClientLogger(PrivateEndpointConnectionInner.class);
+
     /*
      * The resource of private end point.
      */
@@ -85,5 +88,19 @@ public class PrivateEndpointConnectionInner extends ProxyResource {
      */
     public PrivateEndpointConnectionProvisioningState getProvisioningState() {
         return this.provisioningState;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getPrivateEndpoint() != null) {
+            getPrivateEndpoint().validate();
+        }
+        if (getPrivateLinkServiceConnectionState() != null) {
+            getPrivateLinkServiceConnectionState().validate();
+        }
     }
 }

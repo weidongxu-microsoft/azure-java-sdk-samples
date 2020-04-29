@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The KeyVaultProperties model. */
 @Fluent
 public final class KeyVaultProperties {
+    private final ClientLogger logger = new ClientLogger(KeyVaultProperties.class);
+
     /*
      * The name of KeyVault key.
      */
@@ -118,5 +121,13 @@ public final class KeyVaultProperties {
      */
     public OffsetDateTime getLastKeyRotationTimestamp() {
         return this.lastKeyRotationTimestamp;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

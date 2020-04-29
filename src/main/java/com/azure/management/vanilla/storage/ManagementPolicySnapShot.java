@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ManagementPolicySnapShot model. */
 @Fluent
 public final class ManagementPolicySnapShot {
+    private final ClientLogger logger = new ClientLogger(ManagementPolicySnapShot.class);
+
     /*
      * The function to delete the blob snapshot
      */
@@ -34,5 +37,16 @@ public final class ManagementPolicySnapShot {
     public ManagementPolicySnapShot setDelete(DateAfterCreation delete) {
         this.delete = delete;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getDelete() != null) {
+            getDelete().validate();
+        }
     }
 }

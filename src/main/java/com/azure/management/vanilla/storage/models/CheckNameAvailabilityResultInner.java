@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.Reason;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The CheckNameAvailabilityResult model. */
 @Immutable
 public final class CheckNameAvailabilityResultInner {
+    private final ClientLogger logger = new ClientLogger(CheckNameAvailabilityResultInner.class);
+
     /*
      * Gets a boolean value that indicates whether the name is available for
      * you to use. If true, the name is available. If false, the name has
@@ -59,5 +62,13 @@ public final class CheckNameAvailabilityResultInner {
      */
     public String getMessage() {
         return this.message;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The AzureFilesIdentityBasedAuthentication model. */
 @Fluent
 public final class AzureFilesIdentityBasedAuthentication {
+    private final ClientLogger logger = new ClientLogger(AzureFilesIdentityBasedAuthentication.class);
+
     /*
      * Indicates the directory service used.
      */
@@ -62,5 +65,22 @@ public final class AzureFilesIdentityBasedAuthentication {
         ActiveDirectoryProperties activeDirectoryProperties) {
         this.activeDirectoryProperties = activeDirectoryProperties;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getDirectoryServiceOptions() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property directoryServiceOptions in model AzureFilesIdentityBasedAuthentication"));
+        }
+        if (getActiveDirectoryProperties() != null) {
+            getActiveDirectoryProperties().validate();
+        }
     }
 }

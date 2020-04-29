@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The EncryptionService model. */
 @Fluent
 public final class EncryptionService {
+    private final ClientLogger logger = new ClientLogger(EncryptionService.class);
+
     /*
      * A boolean indicating whether or not the service encrypts the data as it
      * is stored.
@@ -88,5 +91,13 @@ public final class EncryptionService {
     public EncryptionService setKeyType(KeyType keyType) {
         this.keyType = keyType;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

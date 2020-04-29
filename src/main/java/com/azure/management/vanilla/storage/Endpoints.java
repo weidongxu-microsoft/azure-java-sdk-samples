@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Endpoints model. */
 @Fluent
 public final class Endpoints {
+    private final ClientLogger logger = new ClientLogger(Endpoints.class);
+
     /*
      * Gets the blob endpoint.
      */
@@ -150,5 +153,19 @@ public final class Endpoints {
     public Endpoints setInternetEndpoints(StorageAccountInternetEndpoints internetEndpoints) {
         this.internetEndpoints = internetEndpoints;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getMicrosoftEndpoints() != null) {
+            getMicrosoftEndpoints().validate();
+        }
+        if (getInternetEndpoints() != null) {
+            getInternetEndpoints().validate();
+        }
     }
 }

@@ -24,7 +24,7 @@ public class StorageAccountSampleVanilla {
         final String saName = "sasamplevanilla";
 
         // create storage account
-        StorageAccountInner storageAccount = client.storageAccounts().create(context.resourceGroup(), saName,
+        StorageAccountInner storageAccount = client.getStorageAccounts().create(context.resourceGroup(), saName,
                 new StorageAccountCreateParameters()
                         .setLocation(context.location())
                         .setKind(Kind.STORAGE_V2)
@@ -41,7 +41,7 @@ public class StorageAccountSampleVanilla {
         /* vanilla can skip this, on update if id or name is known and no info required from the resource.
         storageAccount = client.storageAccounts().getByResourceGroup(context.resourceGroup(), saName);
          */
-        storageAccount = client.storageAccounts().update(context.resourceGroup(), saName,
+        storageAccount = client.getStorageAccounts().update(context.resourceGroup(), saName,
                 new StorageAccountUpdateParameters()
                         .setTags(Map.of("product", "javasdk"))
                         .setAccessTier(AccessTier.COOL));
@@ -49,21 +49,21 @@ public class StorageAccountSampleVanilla {
         context.logger().info("tags after update: {}", storageAccount.getTags());
 
         // create container under storage account
-        BlobContainerInner blobContainer = client.blobContainers().create(context.resourceGroup(), saName, "container1",
+        BlobContainerInner blobContainer = client.getBlobContainers().create(context.resourceGroup(), saName, "container1",
                 new BlobContainerInner()
                         .setPublicAccess(PublicAccess.BLOB));
 
         context.logger().info("container public access: {}", blobContainer.getPublicAccess());
 
         // lease on container
-        LeaseContainerResponseInner leaseResponse = client.blobContainers().lease(context.resourceGroup(), saName, "container1",
+        LeaseContainerResponseInner leaseResponse = client.getBlobContainers().lease(context.resourceGroup(), saName, "container1",
                 new LeaseContainerRequest()
                         .setLeaseDuration(15));
 
         context.logger().info("container lease duration: {}", leaseResponse.getLeaseTimeSeconds());
 
         // create immutability policy under container
-        ImmutabilityPolicyInner immutabilityPolicy = client.blobContainers().createOrUpdateImmutabilityPolicy(context.resourceGroup(), saName, "container1",
+        ImmutabilityPolicyInner immutabilityPolicy = client.getBlobContainers().createOrUpdateImmutabilityPolicy(context.resourceGroup(), saName, "container1",
                 null,
                 new ImmutabilityPolicyInner()
                         .setImmutabilityPeriodSinceCreationInDays(7)
@@ -72,6 +72,6 @@ public class StorageAccountSampleVanilla {
         context.logger().info("immutability policy period: {}", immutabilityPolicy.getImmutabilityPeriodSinceCreationInDays());
 
         // delete storage account
-        client.storageAccounts().delete(context.resourceGroup(), saName);
+        client.getStorageAccounts().delete(context.resourceGroup(), saName);
     }
 }

@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LeaseContainerResponse model. */
 @Fluent
 public final class LeaseContainerResponseInner {
+    private final ClientLogger logger = new ClientLogger(LeaseContainerResponseInner.class);
+
     /*
      * Returned unique lease ID that must be included with any request to
      * delete the container, or to renew, change, or release the lease.
@@ -63,5 +66,13 @@ public final class LeaseContainerResponseInner {
     public LeaseContainerResponseInner setLeaseTimeSeconds(String leaseTimeSeconds) {
         this.leaseTimeSeconds = leaseTimeSeconds;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

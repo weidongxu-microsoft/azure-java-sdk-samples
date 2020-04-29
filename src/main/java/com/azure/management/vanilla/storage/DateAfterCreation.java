@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The DateAfterCreation model. */
 @Fluent
 public final class DateAfterCreation {
+    private final ClientLogger logger = new ClientLogger(DateAfterCreation.class);
+
     /*
      * Value indicating the age in days after creation
      */
@@ -34,5 +37,13 @@ public final class DateAfterCreation {
     public DateAfterCreation setDaysAfterCreationGreaterThan(float daysAfterCreationGreaterThan) {
         this.daysAfterCreationGreaterThan = daysAfterCreationGreaterThan;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The OperationDisplay model. */
 @Fluent
 public final class OperationDisplay {
+    private final ClientLogger logger = new ClientLogger(OperationDisplay.class);
+
     /*
      * Service provider: Microsoft Storage.
      */
@@ -112,5 +115,13 @@ public final class OperationDisplay {
     public OperationDisplay setDescription(String description) {
         this.description = description;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

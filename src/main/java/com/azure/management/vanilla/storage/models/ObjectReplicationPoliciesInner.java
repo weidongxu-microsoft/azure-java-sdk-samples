@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The ObjectReplicationPolicies model. */
 @Fluent
 public final class ObjectReplicationPoliciesInner {
+    private final ClientLogger logger = new ClientLogger(ObjectReplicationPoliciesInner.class);
+
     /*
      * The replication policy between two storage accounts.
      */
@@ -35,5 +38,16 @@ public final class ObjectReplicationPoliciesInner {
     public ObjectReplicationPoliciesInner setValue(List<ObjectReplicationPolicyInner> value) {
         this.value = value;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getValue() != null) {
+            getValue().forEach(e -> e.validate());
+        }
     }
 }

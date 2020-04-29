@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The ServiceSpecification model. */
 @Fluent
 public final class ServiceSpecification {
+    private final ClientLogger logger = new ClientLogger(ServiceSpecification.class);
+
     /*
      * Metric specifications of operation.
      */
@@ -35,5 +38,16 @@ public final class ServiceSpecification {
     public ServiceSpecification setMetricSpecifications(List<MetricSpecification> metricSpecifications) {
         this.metricSpecifications = metricSpecifications;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getMetricSpecifications() != null) {
+            getMetricSpecifications().forEach(e -> e.validate());
+        }
     }
 }

@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ManagementPolicyRule model. */
 @Fluent
 public final class ManagementPolicyRule {
+    private final ClientLogger logger = new ClientLogger(ManagementPolicyRule.class);
+
     /*
      * Rule is enabled if set to true.
      */
@@ -120,5 +123,25 @@ public final class ManagementPolicyRule {
     public ManagementPolicyRule setDefinition(ManagementPolicyDefinition definition) {
         this.definition = definition;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getName() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException("Missing required property name in model ManagementPolicyRule"));
+        }
+        if (getDefinition() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException("Missing required property definition in model ManagementPolicyRule"));
+        } else {
+            getDefinition().validate();
+        }
     }
 }

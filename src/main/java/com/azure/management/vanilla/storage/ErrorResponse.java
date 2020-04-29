@@ -5,11 +5,14 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ErrorResponse model. */
 @Fluent
 public final class ErrorResponse {
+    private final ClientLogger logger = new ClientLogger(ErrorResponse.class);
+
     /*
      * An identifier for the error. Codes are invariant and are intended to be
      * consumed programmatically.
@@ -66,5 +69,13 @@ public final class ErrorResponse {
     public ErrorResponse setMessage(String message) {
         this.message = message;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
     }
 }

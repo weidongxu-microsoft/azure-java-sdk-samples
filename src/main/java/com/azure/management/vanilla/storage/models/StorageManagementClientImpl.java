@@ -10,10 +10,13 @@ import com.azure.core.http.policy.CookiePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.AzureEnvironment;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.AzureServiceClient;
 
 /** Initializes a new instance of the StorageManagementClientImpl type. */
 public final class StorageManagementClientImpl extends AzureServiceClient {
+    private final ClientLogger logger = new ClientLogger(StorageManagementClientImpl.class);
+
     /** The ID of the target subscription. */
     private String subscriptionId;
 
@@ -103,7 +106,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the OperationsInner object.
      */
-    public OperationsInner operations() {
+    public OperationsInner getOperations() {
         return this.operations;
     }
 
@@ -115,7 +118,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the SkusInner object.
      */
-    public SkusInner skus() {
+    public SkusInner getSkus() {
         return this.skus;
     }
 
@@ -127,7 +130,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the StorageAccountsInner object.
      */
-    public StorageAccountsInner storageAccounts() {
+    public StorageAccountsInner getStorageAccounts() {
         return this.storageAccounts;
     }
 
@@ -139,7 +142,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the UsagesInner object.
      */
-    public UsagesInner usages() {
+    public UsagesInner getUsages() {
         return this.usages;
     }
 
@@ -151,7 +154,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the ManagementPoliciesInner object.
      */
-    public ManagementPoliciesInner managementPolicies() {
+    public ManagementPoliciesInner getManagementPolicies() {
         return this.managementPolicies;
     }
 
@@ -163,7 +166,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the PrivateEndpointConnectionsInner object.
      */
-    public PrivateEndpointConnectionsInner privateEndpointConnections() {
+    public PrivateEndpointConnectionsInner getPrivateEndpointConnections() {
         return this.privateEndpointConnections;
     }
 
@@ -175,7 +178,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the PrivateLinkResourcesInner object.
      */
-    public PrivateLinkResourcesInner privateLinkResources() {
+    public PrivateLinkResourcesInner getPrivateLinkResources() {
         return this.privateLinkResources;
     }
 
@@ -187,7 +190,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the ObjectReplicationPoliciesOperationsInner object.
      */
-    public ObjectReplicationPoliciesOperationsInner objectReplicationPoliciesOperations() {
+    public ObjectReplicationPoliciesOperationsInner getObjectReplicationPoliciesOperations() {
         return this.objectReplicationPoliciesOperations;
     }
 
@@ -199,7 +202,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the EncryptionScopesInner object.
      */
-    public EncryptionScopesInner encryptionScopes() {
+    public EncryptionScopesInner getEncryptionScopes() {
         return this.encryptionScopes;
     }
 
@@ -211,7 +214,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the BlobServicesInner object.
      */
-    public BlobServicesInner blobServices() {
+    public BlobServicesInner getBlobServices() {
         return this.blobServices;
     }
 
@@ -223,7 +226,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the BlobContainersInner object.
      */
-    public BlobContainersInner blobContainers() {
+    public BlobContainersInner getBlobContainers() {
         return this.blobContainers;
     }
 
@@ -235,7 +238,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the FileServicesInner object.
      */
-    public FileServicesInner fileServices() {
+    public FileServicesInner getFileServices() {
         return this.fileServices;
     }
 
@@ -247,7 +250,7 @@ public final class StorageManagementClientImpl extends AzureServiceClient {
      *
      * @return the FileSharesInner object.
      */
-    public FileSharesInner fileShares() {
+    public FileSharesInner getFileShares() {
         return this.fileShares;
     }
 

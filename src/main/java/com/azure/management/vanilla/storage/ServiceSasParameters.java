@@ -5,12 +5,15 @@
 package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The ServiceSasParameters model. */
 @Fluent
 public final class ServiceSasParameters {
+    private final ClientLogger logger = new ClientLogger(ServiceSasParameters.class);
+
     /*
      * The canonical path to the signed resource.
      */
@@ -36,7 +39,7 @@ public final class ServiceSasParameters {
      * An IP address or a range of IP addresses from which to accept requests.
      */
     @JsonProperty(value = "signedIp")
-    private String iPAddressOrRange;
+    private String ipAddressOrRange;
 
     /*
      * The protocol permitted for a request made with the account SAS.
@@ -188,22 +191,22 @@ public final class ServiceSasParameters {
     }
 
     /**
-     * Get the iPAddressOrRange property: An IP address or a range of IP addresses from which to accept requests.
+     * Get the ipAddressOrRange property: An IP address or a range of IP addresses from which to accept requests.
      *
-     * @return the iPAddressOrRange value.
+     * @return the ipAddressOrRange value.
      */
-    public String getIPAddressOrRange() {
-        return this.iPAddressOrRange;
+    public String getIpAddressOrRange() {
+        return this.ipAddressOrRange;
     }
 
     /**
-     * Set the iPAddressOrRange property: An IP address or a range of IP addresses from which to accept requests.
+     * Set the ipAddressOrRange property: An IP address or a range of IP addresses from which to accept requests.
      *
-     * @param iPAddressOrRange the iPAddressOrRange value to set.
+     * @param ipAddressOrRange the ipAddressOrRange value to set.
      * @return the ServiceSasParameters object itself.
      */
-    public ServiceSasParameters setIPAddressOrRange(String iPAddressOrRange) {
-        this.iPAddressOrRange = iPAddressOrRange;
+    public ServiceSasParameters setIpAddressOrRange(String ipAddressOrRange) {
+        this.ipAddressOrRange = ipAddressOrRange;
         return this;
     }
 
@@ -487,5 +490,19 @@ public final class ServiceSasParameters {
     public ServiceSasParameters setContentType(String contentType) {
         this.contentType = contentType;
         return this;
+    }
+
+    /**
+     * Validates the instance.
+     *
+     * @throws IllegalArgumentException thrown if the instance is not valid.
+     */
+    public void validate() {
+        if (getCanonicalizedResource() == null) {
+            throw logger
+                .logExceptionAsError(
+                    new IllegalArgumentException(
+                        "Missing required property canonicalizedResource in model ServiceSasParameters"));
+        }
     }
 }
