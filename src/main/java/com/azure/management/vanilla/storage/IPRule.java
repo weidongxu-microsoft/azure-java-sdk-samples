@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The IpRule model. */
 @Fluent
 public final class IpRule {
-    private final ClientLogger logger = new ClientLogger(IpRule.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(IpRule.class);
 
     /*
      * Specifies the IP or IP range in CIDR format. Only IPV4 address is

@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The CorsRules model. */
 @Fluent
 public final class CorsRules {
-    private final ClientLogger logger = new ClientLogger(CorsRules.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(CorsRules.class);
 
     /*
      * The List of CORS rules. You can include up to five CorsRule elements in

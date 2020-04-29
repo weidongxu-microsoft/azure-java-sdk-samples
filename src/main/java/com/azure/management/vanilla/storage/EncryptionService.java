@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The EncryptionService model. */
 @Fluent
 public final class EncryptionService {
-    private final ClientLogger logger = new ClientLogger(EncryptionService.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(EncryptionService.class);
 
     /*
      * A boolean indicating whether or not the service encrypts the data as it

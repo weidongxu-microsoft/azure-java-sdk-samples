@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Sku model. */
 @Fluent
 public final class Sku {
-    private final ClientLogger logger = new ClientLogger(Sku.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Sku.class);
 
     /*
      * The SKU name. Required for account creation; optional for update. Note

@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The SkuCapability model. */
 @Immutable
 public final class SkuCapability {
-    private final ClientLogger logger = new ClientLogger(SkuCapability.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(SkuCapability.class);
 
     /*
      * The name of capability, The capability information in the specified SKU,

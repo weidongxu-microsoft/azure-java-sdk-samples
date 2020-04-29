@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.AzureEntityResource;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Map;
 @JsonFlatten
 @Fluent
 public class FileShareInner extends AzureEntityResource {
-    private final ClientLogger logger = new ClientLogger(FileShareInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(FileShareInner.class);
 
     /*
      * Returns the date and time the share was last modified.

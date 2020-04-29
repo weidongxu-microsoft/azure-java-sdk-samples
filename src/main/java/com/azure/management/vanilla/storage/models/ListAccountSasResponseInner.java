@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ListAccountSasResponse model. */
 @Immutable
 public final class ListAccountSasResponseInner {
-    private final ClientLogger logger = new ClientLogger(ListAccountSasResponseInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ListAccountSasResponseInner.class);
 
     /*
      * List SAS credentials of storage account.

@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The ServiceSasParameters model. */
 @Fluent
 public final class ServiceSasParameters {
-    private final ClientLogger logger = new ClientLogger(ServiceSasParameters.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ServiceSasParameters.class);
 
     /*
      * The canonical path to the signed resource.

@@ -6,6 +6,7 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 /** The BlobRestoreParameters model. */
 @Fluent
 public final class BlobRestoreParameters {
-    private final ClientLogger logger = new ClientLogger(BlobRestoreParameters.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(BlobRestoreParameters.class);
 
     /*
      * Restore blob to the specified time.

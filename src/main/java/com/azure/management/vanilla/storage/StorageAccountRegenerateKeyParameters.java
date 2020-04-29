@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The StorageAccountRegenerateKeyParameters model. */
 @Fluent
 public final class StorageAccountRegenerateKeyParameters {
-    private final ClientLogger logger = new ClientLogger(StorageAccountRegenerateKeyParameters.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(StorageAccountRegenerateKeyParameters.class);
 
     /*
      * The name of storage keys that want to be regenerated, possible values

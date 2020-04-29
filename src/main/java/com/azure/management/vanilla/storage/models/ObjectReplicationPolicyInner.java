@@ -9,6 +9,7 @@ import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.management.ProxyResource;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.ObjectReplicationPolicyRule;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 @JsonFlatten
 @Fluent
 public class ObjectReplicationPolicyInner extends ProxyResource {
-    private final ClientLogger logger = new ClientLogger(ObjectReplicationPolicyInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ObjectReplicationPolicyInner.class);
 
     /*
      * A unique id for object replication policy.

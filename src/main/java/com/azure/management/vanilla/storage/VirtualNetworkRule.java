@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The VirtualNetworkRule model. */
 @Fluent
 public final class VirtualNetworkRule {
-    private final ClientLogger logger = new ClientLogger(VirtualNetworkRule.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(VirtualNetworkRule.class);
 
     /*
      * Resource ID of a subnet, for example:

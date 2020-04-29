@@ -11,13 +11,14 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.CorsRules;
 import com.azure.management.vanilla.storage.DeleteRetentionPolicy;
 import com.azure.management.vanilla.storage.Sku;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The FileServiceProperties model. */
 @JsonFlatten
 @Fluent
 public class FileServicePropertiesInner extends ProxyResource {
-    private final ClientLogger logger = new ClientLogger(FileServicePropertiesInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(FileServicePropertiesInner.class);
 
     /*
      * Sku name and tier.

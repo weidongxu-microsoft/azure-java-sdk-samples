@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The PrivateEndpoint model. */
 @Immutable
 public final class PrivateEndpoint {
-    private final ClientLogger logger = new ClientLogger(PrivateEndpoint.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(PrivateEndpoint.class);
 
     /*
      * The ARM identifier for Private Endpoint

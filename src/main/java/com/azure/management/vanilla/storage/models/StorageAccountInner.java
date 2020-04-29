@@ -22,6 +22,7 @@ import com.azure.management.vanilla.storage.NetworkRuleSet;
 import com.azure.management.vanilla.storage.ProvisioningState;
 import com.azure.management.vanilla.storage.RoutingPreference;
 import com.azure.management.vanilla.storage.Sku;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -30,7 +31,7 @@ import java.util.List;
 @JsonFlatten
 @Fluent
 public class StorageAccountInner extends Resource {
-    private final ClientLogger logger = new ClientLogger(StorageAccountInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(StorageAccountInner.class);
 
     /*
      * Gets the SKU.

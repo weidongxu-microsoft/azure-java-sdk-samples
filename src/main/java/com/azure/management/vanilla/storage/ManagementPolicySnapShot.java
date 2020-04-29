@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ManagementPolicySnapShot model. */
 @Fluent
 public final class ManagementPolicySnapShot {
-    private final ClientLogger logger = new ClientLogger(ManagementPolicySnapShot.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ManagementPolicySnapShot.class);
 
     /*
      * The function to delete the blob snapshot

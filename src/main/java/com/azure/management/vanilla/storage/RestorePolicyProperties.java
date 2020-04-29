@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The RestorePolicyProperties model. */
 @Fluent
 public final class RestorePolicyProperties {
-    private final ClientLogger logger = new ClientLogger(RestorePolicyProperties.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(RestorePolicyProperties.class);
 
     /*
      * Blob restore is enabled if set to true.

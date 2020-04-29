@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The CustomDomain model. */
 @Fluent
 public final class CustomDomain {
-    private final ClientLogger logger = new ClientLogger(CustomDomain.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(CustomDomain.class);
 
     /*
      * Gets or sets the custom domain name assigned to the storage account.

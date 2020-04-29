@@ -7,12 +7,13 @@ package com.azure.management.vanilla.storage.models;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.Reason;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The CheckNameAvailabilityResult model. */
 @Immutable
 public final class CheckNameAvailabilityResultInner {
-    private final ClientLogger logger = new ClientLogger(CheckNameAvailabilityResultInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(CheckNameAvailabilityResultInner.class);
 
     /*
      * Gets a boolean value that indicates whether the name is available for

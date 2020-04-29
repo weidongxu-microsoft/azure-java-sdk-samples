@@ -8,12 +8,13 @@ import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.BlobRestoreParameters;
 import com.azure.management.vanilla.storage.BlobRestoreProgressStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The BlobRestoreStatus model. */
 @Immutable
 public final class BlobRestoreStatusInner {
-    private final ClientLogger logger = new ClientLogger(BlobRestoreStatusInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(BlobRestoreStatusInner.class);
 
     /*
      * The status of blob restore progress. Possible values are: - InProgress:

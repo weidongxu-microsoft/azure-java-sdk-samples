@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The OperationListResult model. */
 @Fluent
 public final class OperationListResultInner {
-    private final ClientLogger logger = new ClientLogger(OperationListResultInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(OperationListResultInner.class);
 
     /*
      * List of Storage operations supported by the Storage resource provider.

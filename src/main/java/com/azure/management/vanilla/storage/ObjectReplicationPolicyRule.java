@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ObjectReplicationPolicyRule model. */
 @Fluent
 public final class ObjectReplicationPolicyRule {
-    private final ClientLogger logger = new ClientLogger(ObjectReplicationPolicyRule.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ObjectReplicationPolicyRule.class);
 
     /*
      * Rule Id is auto-generated for each new rule on destination account. It

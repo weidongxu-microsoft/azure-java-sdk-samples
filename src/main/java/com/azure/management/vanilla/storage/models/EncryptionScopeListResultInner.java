@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The EncryptionScopeListResult model. */
 @Immutable
 public final class EncryptionScopeListResultInner {
-    private final ClientLogger logger = new ClientLogger(EncryptionScopeListResultInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(EncryptionScopeListResultInner.class);
 
     /*
      * List of encryption scopes requested.

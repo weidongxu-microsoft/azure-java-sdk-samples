@@ -14,6 +14,7 @@ import com.azure.management.vanilla.storage.LeaseState;
 import com.azure.management.vanilla.storage.LeaseStatus;
 import com.azure.management.vanilla.storage.LegalHoldProperties;
 import com.azure.management.vanilla.storage.PublicAccess;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 import java.util.Map;
@@ -22,7 +23,7 @@ import java.util.Map;
 @JsonFlatten
 @Fluent
 public class ListContainerItemInner extends AzureEntityResource {
-    private final ClientLogger logger = new ClientLogger(ListContainerItemInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ListContainerItemInner.class);
 
     /*
      * Default the container to use specified encryption scope for all writes.

@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The DateAfterModification model. */
 @Fluent
 public final class DateAfterModification {
-    private final ClientLogger logger = new ClientLogger(DateAfterModification.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(DateAfterModification.class);
 
     /*
      * Value indicating the age in days after last modification

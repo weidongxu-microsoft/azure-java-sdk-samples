@@ -9,13 +9,14 @@ import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.OperationDisplay;
 import com.azure.management.vanilla.storage.ServiceSpecification;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Operation model. */
 @JsonFlatten
 @Fluent
 public class OperationInner {
-    private final ClientLogger logger = new ClientLogger(OperationInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(OperationInner.class);
 
     /*
      * Operation name: {provider}/{resource}/{operation}

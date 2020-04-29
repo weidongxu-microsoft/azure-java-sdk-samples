@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Encryption model. */
 @Fluent
 public final class Encryption {
-    private final ClientLogger logger = new ClientLogger(Encryption.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Encryption.class);
 
     /*
      * List of services which support encryption.

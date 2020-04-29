@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ManagementPolicyRule model. */
 @Fluent
 public final class ManagementPolicyRule {
-    private final ClientLogger logger = new ClientLogger(ManagementPolicyRule.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ManagementPolicyRule.class);
 
     /*
      * Rule is enabled if set to true.

@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The NetworkRuleSet model. */
 @Fluent
 public final class NetworkRuleSet {
-    private final ClientLogger logger = new ClientLogger(NetworkRuleSet.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(NetworkRuleSet.class);
 
     /*
      * Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.

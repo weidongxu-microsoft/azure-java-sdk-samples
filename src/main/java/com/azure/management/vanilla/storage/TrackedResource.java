@@ -7,13 +7,14 @@ package com.azure.management.vanilla.storage;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.ProxyResource;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /** The TrackedResource model. */
 @Fluent
 public class TrackedResource extends ProxyResource {
-    private final ClientLogger logger = new ClientLogger(TrackedResource.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(TrackedResource.class);
 
     /*
      * Resource tags.

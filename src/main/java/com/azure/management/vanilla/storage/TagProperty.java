@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The TagProperty model. */
 @Immutable
 public final class TagProperty {
-    private final ClientLogger logger = new ClientLogger(TagProperty.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(TagProperty.class);
 
     /*
      * The tag value.

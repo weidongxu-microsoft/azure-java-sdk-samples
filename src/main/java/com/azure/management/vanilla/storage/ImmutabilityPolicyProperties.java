@@ -7,6 +7,7 @@ package com.azure.management.vanilla.storage;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @JsonFlatten
 @Fluent
 public class ImmutabilityPolicyProperties {
-    private final ClientLogger logger = new ClientLogger(ImmutabilityPolicyProperties.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ImmutabilityPolicyProperties.class);
 
     /*
      * ImmutabilityPolicy Etag.

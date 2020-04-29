@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Identity model. */
 @Fluent
 public final class Identity {
-    private final ClientLogger logger = new ClientLogger(Identity.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Identity.class);
 
     /*
      * The principal ID of resource identity.

@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The LeaseContainerResponse model. */
 @Fluent
 public final class LeaseContainerResponseInner {
-    private final ClientLogger logger = new ClientLogger(LeaseContainerResponseInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(LeaseContainerResponseInner.class);
 
     /*
      * Returned unique lease ID that must be included with any request to

@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The StorageAccountListResult model. */
 @Immutable
 public final class StorageAccountListResultInner {
-    private final ClientLogger logger = new ClientLogger(StorageAccountListResultInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(StorageAccountListResultInner.class);
 
     /*
      * Gets the list of storage accounts and their properties.

@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The Endpoints model. */
 @Fluent
 public final class Endpoints {
-    private final ClientLogger logger = new ClientLogger(Endpoints.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Endpoints.class);
 
     /*
      * Gets the blob endpoint.

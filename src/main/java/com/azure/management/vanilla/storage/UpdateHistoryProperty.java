@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /** The UpdateHistoryProperty model. */
 @Immutable
 public final class UpdateHistoryProperty {
-    private final ClientLogger logger = new ClientLogger(UpdateHistoryProperty.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(UpdateHistoryProperty.class);
 
     /*
      * The ImmutabilityPolicy update type of a blob container, possible values

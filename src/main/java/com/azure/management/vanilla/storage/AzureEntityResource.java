@@ -7,12 +7,13 @@ package com.azure.management.vanilla.storage;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.management.ProxyResource;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The AzureEntityResource model. */
 @Immutable
 public class AzureEntityResource extends ProxyResource {
-    private final ClientLogger logger = new ClientLogger(AzureEntityResource.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(AzureEntityResource.class);
 
     /*
      * Resource Etag.

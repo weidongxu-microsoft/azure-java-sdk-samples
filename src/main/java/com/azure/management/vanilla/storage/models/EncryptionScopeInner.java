@@ -11,6 +11,7 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.EncryptionScopeKeyVaultProperties;
 import com.azure.management.vanilla.storage.EncryptionScopeSource;
 import com.azure.management.vanilla.storage.EncryptionScopeState;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
@@ -18,7 +19,7 @@ import java.time.OffsetDateTime;
 @JsonFlatten
 @Fluent
 public class EncryptionScopeInner extends ProxyResource {
-    private final ClientLogger logger = new ClientLogger(EncryptionScopeInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(EncryptionScopeInner.class);
 
     /*
      * The provider for the encryption scope. Possible values

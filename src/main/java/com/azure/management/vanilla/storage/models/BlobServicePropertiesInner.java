@@ -13,13 +13,14 @@ import com.azure.management.vanilla.storage.CorsRules;
 import com.azure.management.vanilla.storage.DeleteRetentionPolicy;
 import com.azure.management.vanilla.storage.RestorePolicyProperties;
 import com.azure.management.vanilla.storage.Sku;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The BlobServiceProperties model. */
 @JsonFlatten
 @Fluent
 public class BlobServicePropertiesInner extends ProxyResource {
-    private final ClientLogger logger = new ClientLogger(BlobServicePropertiesInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(BlobServicePropertiesInner.class);
 
     /*
      * Sku name and tier.

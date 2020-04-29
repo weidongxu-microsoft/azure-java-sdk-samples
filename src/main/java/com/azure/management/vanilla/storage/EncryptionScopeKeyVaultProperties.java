@@ -6,12 +6,13 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The EncryptionScopeKeyVaultProperties model. */
 @Fluent
 public final class EncryptionScopeKeyVaultProperties {
-    private final ClientLogger logger = new ClientLogger(EncryptionScopeKeyVaultProperties.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(EncryptionScopeKeyVaultProperties.class);
 
     /*
      * The object identifier for a key vault key object. When applied, the

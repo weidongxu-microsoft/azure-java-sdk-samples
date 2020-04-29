@@ -11,13 +11,14 @@ import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.PrivateEndpoint;
 import com.azure.management.vanilla.storage.PrivateEndpointConnectionProvisioningState;
 import com.azure.management.vanilla.storage.PrivateLinkServiceConnectionState;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The PrivateEndpointConnection model. */
 @JsonFlatten
 @Fluent
 public class PrivateEndpointConnectionInner extends ProxyResource {
-    private final ClientLogger logger = new ClientLogger(PrivateEndpointConnectionInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(PrivateEndpointConnectionInner.class);
 
     /*
      * The resource of private end point.

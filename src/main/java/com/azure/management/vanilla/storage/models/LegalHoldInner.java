@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The LegalHold model. */
 @Fluent
 public final class LegalHoldInner {
-    private final ClientLogger logger = new ClientLogger(LegalHoldInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(LegalHoldInner.class);
 
     /*
      * The hasLegalHold public property is set to true by SRP if there are at

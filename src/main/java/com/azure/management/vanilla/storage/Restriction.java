@@ -6,13 +6,14 @@ package com.azure.management.vanilla.storage;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The Restriction model. */
 @Fluent
 public final class Restriction {
-    private final ClientLogger logger = new ClientLogger(Restriction.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(Restriction.class);
 
     /*
      * The type of restrictions. As of now only possible value for this is

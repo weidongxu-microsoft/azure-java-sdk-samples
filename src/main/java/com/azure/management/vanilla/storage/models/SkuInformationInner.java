@@ -11,13 +11,14 @@ import com.azure.management.vanilla.storage.Restriction;
 import com.azure.management.vanilla.storage.SkuCapability;
 import com.azure.management.vanilla.storage.SkuName;
 import com.azure.management.vanilla.storage.SkuTier;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** The SkuInformation model. */
 @Fluent
 public final class SkuInformationInner {
-    private final ClientLogger logger = new ClientLogger(SkuInformationInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(SkuInformationInner.class);
 
     /*
      * The SKU name. Required for account creation; optional for update. Note

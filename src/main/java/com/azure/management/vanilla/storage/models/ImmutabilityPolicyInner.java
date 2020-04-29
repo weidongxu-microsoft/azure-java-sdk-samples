@@ -9,13 +9,14 @@ import com.azure.core.annotation.JsonFlatten;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.management.vanilla.storage.AzureEntityResource;
 import com.azure.management.vanilla.storage.ImmutabilityPolicyState;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** The ImmutabilityPolicy model. */
 @JsonFlatten
 @Fluent
 public class ImmutabilityPolicyInner extends AzureEntityResource {
-    private final ClientLogger logger = new ClientLogger(ImmutabilityPolicyInner.class);
+    @JsonIgnore private final ClientLogger logger = new ClientLogger(ImmutabilityPolicyInner.class);
 
     /*
      * The immutability period for the blobs in the container since the policy
