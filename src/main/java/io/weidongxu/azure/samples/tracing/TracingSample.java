@@ -73,6 +73,7 @@ public class TracingSample extends SampleBase {
             LoggingSpanExporter loggingExporter = new LoggingSpanExporter();
             tracerProvider.addSpanProcessor(SimpleSpansProcessor.newBuilder(loggingExporter).build());
 
+            // refer to https://www.jaegertracing.io/docs/1.17/getting-started/
             JaegerGrpcSpanExporter jaegerGrpcSpanExporter = new JaegerGrpcSpanExporter.Builder()
                     .setServiceName("tracing-sample")
                     .setChannel(ManagedChannelBuilder.forTarget("localhost:14250").usePlaintext().build())
