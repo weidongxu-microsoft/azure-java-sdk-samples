@@ -10,7 +10,9 @@ import com.azure.management.vanilla.storage.StorageAccountCreateParameters;
 import com.azure.management.vanilla.storage.models.StorageAccountInner;
 import com.azure.management.vanilla.storage.models.StorageManagementClientBuilder;
 import com.azure.management.vanilla.storage.models.StorageManagementClientImpl;
+import io.grpc.ManagedChannelBuilder;
 import io.opentelemetry.OpenTelemetry;
+import io.opentelemetry.exporters.jaeger.JaegerGrpcSpanExporter;
 import io.opentelemetry.exporters.logging.LoggingSpanExporter;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
 import io.opentelemetry.sdk.trace.TracerSdkProvider;
@@ -18,7 +20,6 @@ import io.opentelemetry.sdk.trace.export.SimpleSpansProcessor;
 import io.opentelemetry.trace.Span;
 import io.opentelemetry.trace.Tracer;
 import io.weidongxu.azure.samples.SampleBase;
-import io.weidongxu.azure.samples.storage.StorageAccountSampleVanilla;
 
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class TracingSample extends SampleBase {
                 .subscriptionId(subscriptionId)
                 .buildClient();
 
-        Span span = TRACER.spanBuilder("/").setSpanKind(Span.Kind.CLIENT).startSpan();
+        Span span = TRACER.spanBuilder("user-parent-span").setSpanKind(Span.Kind.CLIENT).startSpan();
         logger.info("span id: {}", span.getContext().getSpanId());
         try {
             Context context = Context.of(Map.of(com.azure.core.util.tracing.Tracer.PARENT_SPAN_KEY, span));
@@ -67,9 +68,16 @@ public class TracingSample extends SampleBase {
         TracingSample sample = new TracingSample();
         try {
             // configure OpenTelemetry
-            LoggingSpanExporter loggingExporter = new LoggingSpanExporter();
             TracerSdkProvider tracerProvider = OpenTelemetrySdk.getTracerProvider();
+
+            LoggingSpanExporter loggingExporter = new LoggingSpanExporter();
             tracerProvider.addSpanProcessor(SimpleSpansProcessor.newBuilder(loggingExporter).build());
+
+            JaegerGrpcSpanExporter jaegerGrpcSpanExporter = new JaegerGrpcSpanExporter.Builder()
+                    .setServiceName("tracing-sample")
+                    .setChannel(ManagedChannelBuilder.forTarget("localhost:14250").usePlaintext().build())
+                    .build();
+            tracerProvider.addSpanProcessor(SimpleSpansProcessor.newBuilder(jaegerGrpcSpanExporter).build());
 
             sample.createResourceGroup();
 
@@ -79,4 +87,5 @@ public class TracingSample extends SampleBase {
         } finally {
             sample.deleteResourceGroup();
         }
-    }}
+    }
+}
