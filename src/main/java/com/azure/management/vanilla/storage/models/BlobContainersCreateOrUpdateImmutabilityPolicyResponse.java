@@ -7,11 +7,10 @@ package com.azure.management.vanilla.storage.models;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
-import com.azure.management.vanilla.storage.BlobContainersCreateOrUpdateImmutabilityPolicyHeaders;
 
 /** Contains all response data for the createOrUpdateImmutabilityPolicy operation. */
 public final class BlobContainersCreateOrUpdateImmutabilityPolicyResponse
-    extends ResponseBase<BlobContainersCreateOrUpdateImmutabilityPolicyHeaders, ImmutabilityPolicyInner> {
+    extends ResponseBase<BlobContainersCreateOrUpdateImmutabilityPolicyHeaders, ImmutabilityPolicy> {
     /**
      * Creates an instance of BlobContainersCreateOrUpdateImmutabilityPolicyResponse.
      *
@@ -25,14 +24,14 @@ public final class BlobContainersCreateOrUpdateImmutabilityPolicyResponse
         HttpRequest request,
         int statusCode,
         HttpHeaders rawHeaders,
-        ImmutabilityPolicyInner value,
+        ImmutabilityPolicy value,
         BlobContainersCreateOrUpdateImmutabilityPolicyHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 
     /** @return the deserialized response body. */
     @Override
-    public ImmutabilityPolicyInner getValue() {
+    public ImmutabilityPolicy getValue() {
         return super.getValue();
     }
 }

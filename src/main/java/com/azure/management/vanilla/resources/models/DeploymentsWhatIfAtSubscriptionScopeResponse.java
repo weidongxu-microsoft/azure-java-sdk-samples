@@ -7,11 +7,10 @@ package com.azure.management.vanilla.resources.models;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
-import com.azure.management.vanilla.resources.DeploymentsWhatIfAtSubscriptionScopeHeaders;
 
 /** Contains all response data for the whatIfAtSubscriptionScope operation. */
 public final class DeploymentsWhatIfAtSubscriptionScopeResponse
-    extends ResponseBase<DeploymentsWhatIfAtSubscriptionScopeHeaders, WhatIfOperationResultInner> {
+    extends ResponseBase<DeploymentsWhatIfAtSubscriptionScopeHeaders, WhatIfOperationResult> {
     /**
      * Creates an instance of DeploymentsWhatIfAtSubscriptionScopeResponse.
      *
@@ -25,14 +24,14 @@ public final class DeploymentsWhatIfAtSubscriptionScopeResponse
         HttpRequest request,
         int statusCode,
         HttpHeaders rawHeaders,
-        WhatIfOperationResultInner value,
+        WhatIfOperationResult value,
         DeploymentsWhatIfAtSubscriptionScopeHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 
     /** @return the deserialized response body. */
     @Override
-    public WhatIfOperationResultInner getValue() {
+    public WhatIfOperationResult getValue() {
         return super.getValue();
     }
 }

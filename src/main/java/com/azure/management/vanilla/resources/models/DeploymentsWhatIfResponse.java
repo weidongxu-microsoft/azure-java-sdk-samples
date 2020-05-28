@@ -7,11 +7,9 @@ package com.azure.management.vanilla.resources.models;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpRequest;
 import com.azure.core.http.rest.ResponseBase;
-import com.azure.management.vanilla.resources.DeploymentsWhatIfHeaders;
 
 /** Contains all response data for the whatIf operation. */
-public final class DeploymentsWhatIfResponse
-    extends ResponseBase<DeploymentsWhatIfHeaders, WhatIfOperationResultInner> {
+public final class DeploymentsWhatIfResponse extends ResponseBase<DeploymentsWhatIfHeaders, WhatIfOperationResult> {
     /**
      * Creates an instance of DeploymentsWhatIfResponse.
      *
@@ -25,14 +23,14 @@ public final class DeploymentsWhatIfResponse
         HttpRequest request,
         int statusCode,
         HttpHeaders rawHeaders,
-        WhatIfOperationResultInner value,
+        WhatIfOperationResult value,
         DeploymentsWhatIfHeaders headers) {
         super(request, statusCode, rawHeaders, value, headers);
     }
 
     /** @return the deserialized response body. */
     @Override
-    public WhatIfOperationResultInner getValue() {
+    public WhatIfOperationResult getValue() {
         return super.getValue();
     }
 }

@@ -1,8 +1,6 @@
 package io.weidongxu.azure.samples.storage;
 
-import com.azure.core.util.logging.ClientLogger;
-import com.azure.management.vanilla.storage.models.StorageManagementClientBuilder;
-import com.azure.management.vanilla.storage.models.StorageManagementClientImpl;
+import com.azure.management.vanilla.storage.StorageManagementClientBuilder;
 import com.microsoft.azure.management.storage.v2019_06_01.implementation.StorageManager;
 import com.microsoft.rest.LogLevel;
 import io.weidongxu.azure.samples.SampleBase;
@@ -22,12 +20,11 @@ public class StorageAccountSample extends SampleBase {
     }
 
     public void runVanilla() {
-        StorageManagementClientImpl client = new StorageManagementClientBuilder()
+        StorageManagementClientBuilder builder = new StorageManagementClientBuilder()
                 .pipeline(httpPipeline())
-                .subscriptionId(subscriptionId)
-                .buildClient();
+                .subscriptionId(subscriptionId);
 
-        StorageAccountSampleVanilla.run(client, this);
+        StorageAccountSampleVanilla.run(builder, this);
     }
 
     public static void main(String[] args) {

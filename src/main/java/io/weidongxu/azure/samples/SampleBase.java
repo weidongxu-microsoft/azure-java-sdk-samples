@@ -13,9 +13,9 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.identity.DefaultAzureCredentialBuilder;
-import com.azure.management.vanilla.resources.models.ResourceGroupInner;
-import com.azure.management.vanilla.resources.models.ResourceManagementClientBuilder;
-import com.azure.management.vanilla.resources.models.ResourceManagementClientImpl;
+import com.azure.management.vanilla.resources.ResourceGroupsClient;
+import com.azure.management.vanilla.resources.ResourceManagementClientBuilder;
+import com.azure.management.vanilla.resources.models.ResourceGroup;
 import com.microsoft.azure.credentials.ApplicationTokenCredentials;
 import com.microsoft.azure.credentials.AzureTokenCredentials;
 
@@ -70,22 +70,22 @@ public class SampleBase implements ResourceContext {
     }
 
     protected void createResourceGroup() {
-        ResourceManagementClientImpl client = new ResourceManagementClientBuilder()
+        ResourceGroupsClient client = new ResourceManagementClientBuilder()
                 .pipeline(httpPipeline())
                 .subscriptionId(subscriptionId)
-                .buildClient();
+                .buildResourceGroupsClient();
 
-        client.resourceGroups().createOrUpdate(rgName, (ResourceGroupInner) new ResourceGroupInner()
-                .setLocation(location()));
+        client.createOrUpdate(rgName, (ResourceGroup) new ResourceGroup()
+                .withLocation(location()));
     }
 
     protected void deleteResourceGroup() {
-        ResourceManagementClientImpl client = new ResourceManagementClientBuilder()
+        ResourceGroupsClient client = new ResourceManagementClientBuilder()
                 .pipeline(httpPipeline())
                 .subscriptionId(subscriptionId)
-                .buildClient();
+                .buildResourceGroupsClient();
 
-        client.resourceGroups().delete(rgName);
+        client.delete(rgName);
     }
 
     @Override
