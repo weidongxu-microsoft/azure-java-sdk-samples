@@ -11,6 +11,7 @@ import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.management.AzureEnvironment;
+import com.azure.core.tracing.opentelemetry.OpenTelemetryHttpPolicy;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.management.vanilla.resources.ResourceGroupsClient;
@@ -33,6 +34,7 @@ public class SampleBase implements ResourceContext {
 
     // track2 http
     private HttpPipeline httpPipeline;
+    private HttpPipeline httpPipelineOpenTelemetryTracing;
 
     // authenticate
     private final String clientId;
@@ -53,12 +55,24 @@ public class SampleBase implements ResourceContext {
         if (httpPipeline == null) {
             httpPipeline = new HttpPipelineBuilder()
                     .policies(new RequestIdPolicy(), new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy(),
-                            new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC)),
                             new BearerTokenAuthenticationPolicy(new DefaultAzureCredentialBuilder().build(),
-                                    AzureEnvironment.AZURE.getManagementEndpoint() + ".default"))
+                                    AzureEnvironment.AZURE.getManagementEndpoint() + ".default"),
+                            new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC)))
                     .build();
         }
         return httpPipeline;
+    }
+
+    protected HttpPipeline httpPipelineOpenTelemetryTracing() {
+        if (httpPipelineOpenTelemetryTracing == null) {
+            httpPipelineOpenTelemetryTracing = new HttpPipelineBuilder()
+                    .policies(new RequestIdPolicy(), new UserAgentPolicy(), new RetryPolicy(), new CookiePolicy(),
+                            new BearerTokenAuthenticationPolicy(new DefaultAzureCredentialBuilder().build(),
+                                    AzureEnvironment.AZURE.getManagementEndpoint() + ".default"),
+                            new OpenTelemetryHttpPolicy())
+                    .build();
+        }
+        return httpPipelineOpenTelemetryTracing;
     }
 
     protected AzureTokenCredentials azureTokenCredentials() {
