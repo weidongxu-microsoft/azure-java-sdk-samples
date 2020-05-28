@@ -90,7 +90,7 @@ public class SampleBase implements ResourceContext {
                 .buildResourceGroupsClient();
 
         client.createOrUpdate(rgName, (ResourceGroup) new ResourceGroup()
-                .withLocation(location()));
+                .setLocation(location()));
     }
 
     protected void deleteResourceGroup() {

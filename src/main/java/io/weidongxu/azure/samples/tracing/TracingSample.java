@@ -57,7 +57,7 @@ public class TracingSample extends SampleBase {
                                     "cause", "automation")))
                     .subscriberContext(FluxUtil.toReactorContext(context)).block();
 
-            client.delete(this.resourceGroup(), storageAccount.name())
+            client.delete(this.resourceGroup(), storageAccount.getName())
                     .subscriberContext(FluxUtil.toReactorContext(context)).block();
         } finally {
             span.end();

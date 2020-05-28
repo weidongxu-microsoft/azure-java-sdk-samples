@@ -39,7 +39,7 @@ public class StorageAccountSampleVanilla {
                         .setTags(Map.of("product", "javasdk",
                                 "cause", "automation")));
 
-        context.logger().info("tags after create: {}", storageAccount.tags());
+        context.logger().info("tags after create: {}", storageAccount.getTags());
 
         // update storage account
         /* vanilla can skip this, on update if id or name is known and no info required from the resource.
@@ -50,7 +50,7 @@ public class StorageAccountSampleVanilla {
                         .setTags(Map.of("product", "javasdk"))
                         .setAccessTier(AccessTier.COOL));
 
-        context.logger().info("tags after update: {}", storageAccount.tags());
+        context.logger().info("tags after update: {}", storageAccount.getTags());
 
         // create container under storage account
         BlobContainersClient blobContainersClient = builder.buildBlobContainersClient();
