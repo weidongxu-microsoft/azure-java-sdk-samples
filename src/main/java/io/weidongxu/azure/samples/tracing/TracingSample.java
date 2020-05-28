@@ -2,14 +2,14 @@ package io.weidongxu.azure.samples.tracing;
 
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.management.vanilla.storage.Kind;
-import com.azure.management.vanilla.storage.LargeFileSharesState;
-import com.azure.management.vanilla.storage.Sku;
-import com.azure.management.vanilla.storage.SkuName;
-import com.azure.management.vanilla.storage.StorageAccountCreateParameters;
-import com.azure.management.vanilla.storage.models.StorageAccountInner;
-import com.azure.management.vanilla.storage.models.StorageManagementClientBuilder;
-import com.azure.management.vanilla.storage.models.StorageManagementClientImpl;
+import com.azure.management.vanilla.storage.StorageAccountsAsyncClient;
+import com.azure.management.vanilla.storage.StorageManagementClientBuilder;
+import com.azure.management.vanilla.storage.models.Kind;
+import com.azure.management.vanilla.storage.models.LargeFileSharesState;
+import com.azure.management.vanilla.storage.models.Sku;
+import com.azure.management.vanilla.storage.models.SkuName;
+import com.azure.management.vanilla.storage.models.StorageAccount;
+import com.azure.management.vanilla.storage.models.StorageAccountCreateParameters;
 import io.grpc.ManagedChannelBuilder;
 import io.opentelemetry.OpenTelemetry;
 import io.opentelemetry.exporters.jaeger.JaegerGrpcSpanExporter;
@@ -34,10 +34,10 @@ public class TracingSample extends SampleBase {
     public void run() {
         final String saName = "sasampletracing";
 
-        StorageManagementClientImpl client = new StorageManagementClientBuilder()
+        StorageAccountsAsyncClient client = new StorageManagementClientBuilder()
                 .pipeline(httpPipelineOpenTelemetryTracing())
                 .subscriptionId(subscriptionId)
-                .buildClient();
+                .buildStorageAccountsAsyncClient();
 
         Span span = TRACER.spanBuilder("user-parent-span").setSpanKind(Span.Kind.CLIENT).startSpan();
         logger.info("span id: {}", span.getContext().getSpanId());
@@ -45,7 +45,7 @@ public class TracingSample extends SampleBase {
             Context context = Context.of(Map.of(com.azure.core.util.tracing.Tracer.PARENT_SPAN_KEY, span));
 
             // create storage account
-            StorageAccountInner storageAccount = client.getStorageAccounts().createAsync(this.resourceGroup(), saName,
+            StorageAccount storageAccount = client.create(this.resourceGroup(), saName,
                     new StorageAccountCreateParameters()
                             .setLocation(this.location())
                             .setKind(Kind.STORAGE_V2)
@@ -57,7 +57,7 @@ public class TracingSample extends SampleBase {
                                     "cause", "automation")))
                     .subscriberContext(FluxUtil.toReactorContext(context)).block();
 
-            client.getStorageAccounts().deleteAsync(this.resourceGroup(), storageAccount.getName())
+            client.delete(this.resourceGroup(), storageAccount.name())
                     .subscriberContext(FluxUtil.toReactorContext(context)).block();
         } finally {
             span.end();
