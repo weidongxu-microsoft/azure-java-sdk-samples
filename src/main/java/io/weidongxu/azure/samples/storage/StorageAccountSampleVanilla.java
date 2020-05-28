@@ -9,6 +9,7 @@ import com.azure.management.vanilla.storage.models.ImmutabilityPolicy;
 import com.azure.management.vanilla.storage.models.Kind;
 import com.azure.management.vanilla.storage.models.LargeFileSharesState;
 import com.azure.management.vanilla.storage.models.LeaseContainerRequest;
+import com.azure.management.vanilla.storage.models.LeaseContainerRequestAction;
 import com.azure.management.vanilla.storage.models.LeaseContainerResponse;
 import com.azure.management.vanilla.storage.models.PublicAccess;
 import com.azure.management.vanilla.storage.models.Sku;
@@ -62,6 +63,7 @@ public class StorageAccountSampleVanilla {
         // lease on container
         LeaseContainerResponse leaseResponse = blobContainersClient.lease(context.resourceGroup(), saName, "container1",
                 new LeaseContainerRequest()
+                        .setAction(LeaseContainerRequestAction.ACQUIRE)
                         .setLeaseDuration(15));
 
         context.logger().info("container lease duration: {}", leaseResponse.getLeaseTimeSeconds());
